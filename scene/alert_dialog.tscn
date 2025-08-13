@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://boa1xjnxaix86"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4fla"]
+content_margin_left = 4.0
+content_margin_top = 5.0
+content_margin_right = 4.0
+content_margin_bottom = 7.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 2
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="GDScript" id="GDScript_qnsrb"]
+script/source = "@tool
+extends AcceptDialog
+
+@warning_ignore(\"shadowed_variable_base_class\")
+func with_data(dialog_text:String=\"Alert Alert!\", title:String=\"Alert!\", color:=Color.RED) -> AcceptDialog:
+	self.title=title
+	
+	$RichTextLabel.text=dialog_text
+	self.dialog_text=\"\" #dialog_text
+	
+	var sb:StyleBoxFlat = get_theme_stylebox(\"panel\")
+	sb.bg_color=color
+	add_theme_stylebox_override(\"panel\", sb)
+	@warning_ignore(\"shadowed_variable\")
+	return self
+
+
+func _on_rich_text_label_meta_clicked(meta):
+	OS.shell_open(meta)
+	pass # Replace with function body.
+"
+
+[node name="AcceptDialog" type="AcceptDialog"]
+initial_position = 1
+size = Vector2i(400, 200)
+visible = true
+popup_window = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_n4fla")
+dialog_text = "This is a test of the alert system"
+dialog_autowrap = true
+script = SubResource("GDScript_qnsrb")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 396.0
+offset_bottom = 152.0
+bbcode_enabled = true
+
+[connection signal="meta_clicked" from="RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]

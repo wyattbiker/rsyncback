@@ -1,0 +1,518 @@
+[gd_scene load_steps=23 format=3 uid="uid://sw8kouwk8fh2"]
+
+[ext_resource type="Script" uid="uid://jkfr1jotklmg" path="res://addons/rsyncback/rb_main.gd" id="1_m53aq"]
+[ext_resource type="Texture2D" uid="uid://dm8cvc0f7rb3r" path="res://addons/rsyncback/assets/duplicate.png" id="4_rcfp5"]
+
+[sub_resource type="GDScript" id="GDScript_embbx"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_rcxjj"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_1xvmi"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+
+# Optional callback to customize tooltip_type 
+# before displayed.
+# Example:
+#func _customize_tooltip(tooltip_type: Control):
+	#tooltip_type.pivot_offset=tooltip_type.position+tooltip_type.size/2
+	#tooltip_type.rotation_degrees=180
+	#return
+	
+"
+
+[sub_resource type="GDScript" id="GDScript_c77qg"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v2csw"]
+content_margin_left = 30.0
+
+[sub_resource type="GDScript" id="GDScript_nx7ps"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_e2mc6"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_hsguv"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_7102h"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_iqoq0"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rmc3x"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="GDScript" id="GDScript_vjk13"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_4jodg"]
+script/source = "@tool
+extends Button
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2x32p"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0.779291, 0.779291, 0.779291, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+
+[sub_resource type="GDScript" id="GDScript_i0d81"]
+script/source = "@tool
+extends Button
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_ul4tl"]
+script/source = "@tool
+extends CheckBox
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_m713n"]
+script/source = "@tool
+extends Label
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_tamvc"]
+script/source = "@tool
+extends Button
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_gw74g"]
+script/source = "@tool
+extends Button
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26d1e"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="RsyncMain" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+script = ExtResource("1_m53aq")
+metadata/_edit_vertical_guides_ = [-38.0]
+
+[node name="RSyncBackupVesion" type="Label" parent="."]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 11.0
+offset_right = 132.0
+offset_bottom = 42.0
+text = "Version"
+horizontal_alignment = 1
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 421.0
+offset_top = 12.0
+offset_right = 794.0
+offset_bottom = 45.0
+tooltip_text = "To make a backup.
+[ol type=1]
+: Select the rsync command if not already selected.
+: Selected a backup folder, outside of your project folder.
+: View the Excludes text file. Optionally edit. To Exclude must use either exact folder/file names or wildcards. 
+[/ol]
+
+For more details, mouse over the underlined links and buttons to read tooltips"
+focus_mode = 2
+bbcode_enabled = true
+text = "[center][url]RSync Source Code Backup[/url][/center]"
+fit_content = true
+selection_enabled = true
+script = SubResource("GDScript_embbx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 72.0
+offset_right = 1120.0
+offset_bottom = 329.0
+theme_override_constants/separation = 0
+
+[node name="SourcePath" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Source code path"
+editable = false
+
+[node name="SourcePathClick" type="RichTextLabel" parent="VBoxContainer/SourcePath"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -659.0
+offset_top = 4.0
+offset_right = -409.0
+offset_bottom = 32.0
+grow_horizontal = 2
+tooltip_text = "Click to view  project in File Manager."
+bbcode_enabled = true
+text = "[right][url]Project Source Path:[/url][/right]"
+script = SubResource("GDScript_rcxjj")
+
+[node name="RsyncCmdPath" type="LineEdit" parent="VBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+placeholder_text = "Click to choose rsync_cmd_path"
+editable = false
+
+[node name="RsyncCmdPathClick" type="RichTextLabel" parent="VBoxContainer/RsyncCmdPath"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = -259.0
+offset_top = 4.0
+offset_right = -9.0
+offset_bottom = 32.0
+bbcode_enabled = true
+text = "[right][url]RSync Cmd Path:[/url][/right]"
+fit_content = true
+script = SubResource("GDScript_1xvmi")
+
+[node name="DestPath" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Click to choose a valid backup destination folder"
+editable = false
+
+[node name="DestPathClick" type="RichTextLabel" parent="VBoxContainer/DestPath"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -259.0
+offset_top = 4.0
+offset_right = -9.0
+offset_bottom = 33.0
+bbcode_enabled = true
+text = "[right][url]Backup Destination Path:[/url][/right]"
+fit_content = true
+script = SubResource("GDScript_c77qg")
+
+[node name="PrevBackup" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_uneditable_color = Color(1, 0, 0, 1)
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_v2csw")
+text = "No Previous Backup found yet"
+editable = false
+
+[node name="PrevBackupClick" type="RichTextLabel" parent="VBoxContainer/PrevBackup"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = -259.0
+offset_top = 4.0
+offset_right = -9.0
+offset_bottom = 32.0
+tooltip_text = "Shows the Previous Backup in the Destination Path. This backup is compared to the current source and a new incremental backup folder is created using  current datetime name."
+bbcode_enabled = true
+text = "[right][url]Previous Backup:[/url][/right]"
+fit_content = true
+script = SubResource("GDScript_nx7ps")
+
+[node name="LogFilePath" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_uneditable_color = Color(1, 0, 0, 1)
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_v2csw")
+text = "No Log File Path yet."
+editable = false
+
+[node name="LogFilePathClick" type="RichTextLabel" parent="VBoxContainer/LogFilePath"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = -259.0
+offset_top = 4.0
+offset_right = -9.0
+offset_bottom = 32.0
+tooltip_text = "Click to view logfiles if present. 
+Logfiles are created in same folder as Destination Path"
+bbcode_enabled = true
+text = "[right][url]Log File Path:[/url][/right]"
+fit_content = true
+script = SubResource("GDScript_e2mc6")
+
+[node name="ExcludeFilePath" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Click to choose exclude_file_path"
+editable = false
+
+[node name="ExcludeFilePathClick" type="RichTextLabel" parent="VBoxContainer/ExcludeFilePath"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = -259.0
+offset_top = 4.0
+offset_right = -9.0
+offset_bottom = 32.0
+bbcode_enabled = true
+text = "[right][url]Exclude File:[/url][/right]"
+fit_content = true
+script = SubResource("GDScript_hsguv")
+
+[node name="ConfigFile" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Path to Config File. "
+editable = false
+
+[node name="ConfigFileClick" type="RichTextLabel" parent="VBoxContainer/ConfigFile"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = -259.0
+offset_top = 4.0
+offset_right = -9.0
+offset_bottom = 32.0
+bbcode_enabled = true
+text = "[right][url]Config File:[/url][/right]"
+fit_content = true
+script = SubResource("GDScript_7102h")
+
+[node name="RSyncCommandLabel" type="RichTextLabel" parent="."]
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = 385.0
+offset_top = 368.0
+offset_right = 631.0
+offset_bottom = 406.0
+tooltip_text = "Actual rsync command that will execute when Run Backup is clicked. [p]Otherwise a message will appear if there was a problem.  Click on View Messages for details."
+bbcode_enabled = true
+text = "RSync Command"
+fit_content = true
+script = SubResource("GDScript_iqoq0")
+
+[node name="RSyncCommand" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = 75.0
+offset_top = 413.0
+offset_right = 1125.0
+offset_bottom = 579.0
+focus_mode = 2
+theme_override_font_sizes/normal_font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_rmc3x")
+bbcode_enabled = true
+text = "Error in Configuration. Click [b]View Messages[/b] button for more info."
+autowrap_mode = 1
+selection_enabled = true
+script = SubResource("GDScript_vjk13")
+
+[node name="ClipboardButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 667.0
+offset_top = 360.0
+offset_right = 716.0
+offset_bottom = 412.0
+tooltip_text = "Copy RSync Command to clipboard to manually execute from command line or terminal."
+icon = ExtResource("4_rcfp5")
+flat = true
+expand_icon = true
+script = SubResource("GDScript_4jodg")
+
+[node name="Label" type="Label" parent="ClipboardButton"]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = -21.0
+offset_right = 296.0
+offset_bottom = 2.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2x32p")
+text = "RSync Command copied to clipboard."
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 601.0
+offset_right = 1068.0
+offset_bottom = 641.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="RunBackup" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Save settings and run the backup. Only available if there are no error messages with configuration.. Click [b] View Messages [/b] button to make corrections."
+disabled = true
+text = "Run Rsync"
+script = SubResource("GDScript_i0d81")
+
+[node name="DryRun" type="CheckBox" parent="HBoxContainer/RunBackup"]
+layout_mode = 1
+offset_left = -71.0
+offset_top = 1.0
+offset_right = -46.0
+offset_bottom = 33.0
+script = SubResource("GDScript_ul4tl")
+
+[node name="Label" type="Label" parent="HBoxContainer/RunBackup/DryRun"]
+layout_mode = 1
+offset_left = -103.0
+offset_right = -14.0
+offset_bottom = 32.0
+tooltip_text = "This is the equivalent of --dry-run argument for rsync.
+Checking this allows you to test the backup. When done you will be able to inspect the log, however no backup is made."
+mouse_filter = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Dry Run:"
+script = SubResource("GDScript_m713n")
+
+[node name="ViewMessages" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 2
+tooltip_text = "Show  error messages with the configuration if any."
+disabled = true
+text = "View Messages"
+script = SubResource("GDScript_tamvc")
+
+[node name="Cancel" type="Button" parent="HBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+tooltip_text = "Disable  RsyncBack plugin."
+text = "Disable"
+script = SubResource("GDScript_gw74g")
+
+[node name="StatusMessage" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 83.0
+offset_top = 375.0
+offset_right = 489.0
+offset_bottom = 408.0
+bbcode_enabled = true
+text = "[pulse freq=1 color=red ease=0]Backing Up. Please Wait...[/pulse]
+"
+fit_content = true
+
+[node name="OpenFileManager" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = 853.0
+offset_top = 379.0
+offset_right = 1107.0
+offset_bottom = 407.0
+tooltip_text = "Click to view backup destination in File Manager, if present. Logfiles are created in same folder as Destination Path"
+theme_override_styles/normal = SubResource("StyleBoxFlat_26d1e")
+bbcode_enabled = true
+text = "[url]Open Destination Path[/url]"
+fit_content = true
+script = SubResource("GDScript_e2mc6")
+
+[connection signal="meta_clicked" from="VBoxContainer/SourcePath/SourcePathClick" to="." method="_on_source_path_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/RsyncCmdPath/RsyncCmdPathClick" to="." method="_on_rsync_cmd_path_click_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/DestPath/DestPathClick" to="." method="_on_dest_path_click_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/PrevBackup/PrevBackupClick" to="." method="_on_prev_backup_click_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/LogFilePath/LogFilePathClick" to="." method="_on_log_file_path_click_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/ExcludeFilePath/ExcludeFilePathClick" to="." method="_on_exclude_file_view_click_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/ConfigFile/ConfigFileClick" to="." method="_on_config_view_meta_clicked"]
+[connection signal="pressed" from="ClipboardButton" to="." method="_on_clipboard_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/RunBackup" to="." method="_on_run_backup_pressed"]
+[connection signal="toggled" from="HBoxContainer/RunBackup/DryRun" to="." method="_on_dry_run_toggled"]
+[connection signal="pressed" from="HBoxContainer/ViewMessages" to="." method="_on_view_messages_pressed"]
+[connection signal="pressed" from="HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="meta_clicked" from="StatusMessage" to="." method="_on_status_message_meta_clicked"]
+[connection signal="meta_clicked" from="OpenFileManager" to="." method="_on_open_file_manager_meta_clicked"]
