@@ -130,24 +130,27 @@ In fact every file you create is a hardlink to an inode. If you copy that file t
 
 ## <ins>Customizing the Defaults of RsynBack.</ins>
 
-A new install of RsyncBack initially reads the choices from a resource file called config.tres. The user then makes the selections and runs the backup. This config.tres can be manually edited in the Inspector. The simplest way to do that is to click on the Config File label link and select Edit In Inspector (Make sure Inspector is showing in the dock). The Godot Inspector will load the config.tres resource file and allow you to make the changes manually and save the config file. Make sure you reload the plugin.
+A new install of RsyncBack initially reads the choices from a resource file called <b>config.tres</b>. The user then makes the selections and runs the backup. This <b>config.tres</b> can be manually edited in the Inspector. The simplest way to do that is to click on the <em>Config File</em> label link and select Edit In Inspector (Make sure Inspector is showing in the dock). The Godot Inspector will load the <b>config.tres</b> resource file and allow you to make the changes manually and save the config file. Make sure you reload the plugin.
 
-Hover over each of the config.tres properties and read the tooltip for more info. The Rsync Arguments Template is where you would customize further the rsync command options.
+Hover over each of the <b>config.tres</b> properties and read the tooltip for more info. The Rsync Arguments Template is where you would customize further the rsync command options.
 
 It looks similar to this:
 
-<code>{dry_run_argument} -avih --mkpath --stats  \
+```
+{dry_run_argument} -avih --mkpath --stats  \
  --out-format="%M %15'l %5f"  \
  --exclude-from="{exclude_file_path}" \
  --link-dest="{dest_path}/{project_name}/{prev_backup}" \
  --log-file-format="%M %15'l %5f" \
  --log-file="{log_file_path}/{current_datetime}{log_file_suffix}" \
  "{source_path}" \
- "{dest_path}/{project_name}/{current_datetime}"</code>
+ "{dest_path}/{project_name}/{current_datetime}"
+```
 
 The curlies {} are properties replaced by RsyncBack when you run the backup. In effect the above becomes something like this command which is what executes.
 
-<code>/usr/local/bin/rsync  -avih --mkpath --stats  \
+```
+/usr/local/bin/rsync  -avih --mkpath --stats  \
  --out-format="%M %15'l %5f"  \
  --exclude-from="/home/user1/godot/tps-demo/addons/rsyncback/exclude.txt" \
  --link-dest="/home/user1/myback/tps-demo-rsync/[2024-10-16][13_22_37]" \
@@ -155,7 +158,7 @@ The curlies {} are properties replaced by RsyncBack when you run the backup. In 
  --log-file="/home/user1/myback/tps-demo-rsync/logfiles/[2024-10-18][17_07_35]_log.txt" \
  "/home/user1/godot/tps-demo/" \
  "/home/user1/myback/tps-demo-rsync/[2024-10-18][17_07_35]"
-</code>
+```
 
 In fact you will see this command in the Rsync Command window. You can click and copy it to the clipboard and run it directly in the command line if you wish!
 
