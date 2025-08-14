@@ -1,20 +1,31 @@
-# ![](Attachments/image2.png)RsyncBack Godot Plugin Documentation
 
-# For Linux, MacOSX and Windows(*)
+<h1 align="center"><img src="Attachments/image2.png">RsyncBack Godot Plugin Documentation</img></h1>
 
-## <u>Quick Setup and Run RsyncBack</u>
+<h1 align="center">For Linux, MacOSX and Windows(*)</h1>
 
-RsyncBack is a plugin addon that allows you to create fast incremental date-stamped backups of your Godot project with a simple click of a button. For more detailed description see [What is rsync?](#what-is-rsync)
+## <ins>Introduction</ins>
+RsyncBack is an addon plugin that uses <strong>rsync</strong> to create fast [incremental date-stamped backups](#what-are-incremental-backups-using-hard-links) of your Godot project with a simple click of a button . For more detailed description of <strong>rsync</strong> see [What is rsync?](#what-is-rsync)
 
-The following is a quick setup and run.
+## <ins>Quick Setup/Run RsyncBack</ins>
 
-1. Download and install the RsyncBack plugin from the Godot AssetLib of your project or clone directly from Github to the ../addons folder of your project.
-2. Enable the RsyncBack plugin in Godot’s Project Settings > Plugins
-3. To start a backup, click on the ![](Attachments/image2.png)RsyncBack link at the top of the editor to see the main screen. Here you select the rsync executable path, the backup path as well as some other options. The first time, you see a screen similar to Fig 1
+The following is a quick install and backup ( See [Uninstall](#uninstall-rsynback) if you wish to remove RsyncBack )
 
-![](Attachments/image4.png)
-<p align="center"><b>Fig 1</b></p>
-4. If rsync is installed and in the $PATH environment (usually /usr/local/bin/ or /usr/bin/), the Rsync Cmd Path label will show the path and version. If not you can manually choose it by clicking on Rsync Cmd Path (see the section below [Finding the rsync command](#finding-the-rsync-command)
+1. Clone directly from Github to the <em>./addons</em> folder below your project:
+```
+cd yourproject
+mkdir addons   # make addons dir if you dont have one
+git clone https://github.com/wyattbiker/rsyncback.git
+```
+
+2. Open your godot project and enable the RsyncBack plugin in Godot’s Menu > <em>Project > Project Settings > Plugins</em>
+
+3. To make a backup, click on the ![](Attachments/image2.png)RsyncBack link at the top of the editor to see the main screen. Here you select the rsync executable path, the backup path as well as some other options. The first time, you see a screen similar to Fig 1
+
+![](Attachments/image4.png)<p align="center"><b>Fig 1</b></p>
+
+4. If rsync is installed and in the $PATH environment (usually <em>/usr/local/bin/ or /usr/bin/</em> ), the Rsync Cmd Path label will show the path and version. If not you can manually choose it by clicking on Rsync Cmd Path label see the section below [Check if rsync is installed](#check-if-rsync-is-installed) 
+
+
 5. Click on Backup Destination Path and pick a folder to use for backup. At this point you will see your screen changed similar to **Fig 2**. and the Run Rsync button enabled.
 
 ![](Attachments/image3.png)
@@ -22,31 +33,38 @@ The following is a quick setup and run.
 
 6. Click on the Exclude File and edit any patterns of files you want to exclude from backup. One line per pattern
 
-- Example. to exclude .godot, or any .git folders or any files with an extension of .import.  
-    .godot .git*  
-    *.import  
-    
+- Example to exclude .godot, or any .git folders or any files with an extension of .import.  
+<code>    
+.godot 
+.git*  
+*.import  
+</code>
 
 7. To start the backup, click on the Run Rsync button and a popup report will show your project files backed up. The first backup is the longest as the complete project folder is backed up. See example **Fig 3**.
 
 ![](Attachments/image5.png)
 <p align="center"><b>Fig 3</b></p>
-8. Click on View Backup Destination Path to review your backup and the log file. You should see the backup folders similar to Fig 4
+8. Click on View Backup Destination Path to review your backup and the log file. You should see the backup folders similar to Fig 4<p>
 
 9. ![](Attachments/image1.png)
 <p align="center"><b>Fig 4</b></p>
 
-10. Go back to editing your project (e.g. clicking on Script). When ready to backup again click on ![](Attachments/image2.png)RsyncBack link to open the plugin screen and then click the Run Rsync button.  A new report will show only the files that were backed up.
+10. Go back to editing your project (e.g. clicking on Script). When ready to backup again click on ![](Attachments/image2.png)RsyncBack link to open the plugin screen and then click the Run Rsync button.  A new report will show only the changed files that were backed up. Clicking on the View Backup Destination Path to review the backups in that folder.
 
-## What is rsync?
+## What are incremental backups using hard-links?
 
-Rsync is one of the most popular and stable open source backup tools included with Linux and MacOSX. It is a terminal run tool with numerous options and arguments for backing up your computer folders incremental/differential, It has been battle tested for years now, is very reliable and has great community support. In its basic form it is a copy/sync tool, in that it copies files from source folder to a destination folder. Rsync backs up files using the native file system of your computer. It does not have its own compressed or proprietary database. You can easily use your File Manager to restore with drag and drop any backup folder or individual files. You can of course view them as regular files using your favorite File Manager. For Linux it could be Dolphin/Nemo/etc and Mac it could be Finder. Or it could be the command line using ls.
+Incremental backups in the case of RsyncBack (using rsync), is when only changed files in your project are backed up to a new date-time stamped folder. In addition hard-links are created in that same backed folder to the unchanged files. In essense, your backup folder looks like a complete backup, but the backup is not only quick, but also takes much less storage
 
-## What is the purpose of the RsyncBack plugin.
+## <ins>What is rsync?<ins>
+
+Rsync is one of the most popular and stable open source backup tools included with Linux and MacOSX (Windows see below [Windows Users](#windows-users)). It is a terminal run tool with numerous options and arguments for backing up your computer folders incremental/differential, It has been battle tested for years now, is very reliable and has great community support. In its basic form it is a copy/sync tool, in that it copies files from source folder to a destination folder. Rsync backs up files using the native file system of your computer. It does not have its own compressed or proprietary database. You can easily use your File Manager to restore with drag and drop any backup folder or individual files. You can of course view them as regular files using your favorite File Manager. For Linux it could be Dolphin/Nemo/etc and Mac it could be Finder. Or it could be the command line using ls. 
+
+## <ins>What is the purpose of the RsyncBack plugin.</ins>
 
 The main usage for RsyncBack plugin is to be a Godot GUI front end and to make it simple to quickly setup and incrementally backup your project. Once installed and configured, the plugin can be run with just the press of a button to make date-stamped incremental backups of your project source files. Each date-stamped backup is its own folder, having the name `[YYYY-MM-DD][HH-MM-SS]`. In addition, it saves storage, because the destination will not contain files that have not been modified but rather a hardlink to the last one modified. When you look or use any of the backup folders, it will look like a complete backup of your source. More on this later.
 
-## Finding the rsync command
+
+## <ins>Check if rsync is installed.</ins>
 
 Before you begin, check that rsync is installed on your system. You can easily check from the command line by running the following terminal commands:  <strong>which rsync</strong> to show you the default path or <b>whereis rsync</b> to check if there are more than one installed. RsyncBack requires version 3.2.4 or above. See example below. To choose the desired rsync path, click on the label Rsync Cmd Path
 
@@ -63,12 +81,10 @@ rsync  version 3.2.7  protocol version 31
 <br>Copyright (C) 1996-2022 by Andrew Tridgell, Wayne Davison, and others.
 </br>.......
 
+## <ins>Windows Users<ins>
+### Installing and running rsync on Windows.
 
-
-
-## **For Windows Users: Installing and running the rsync command.
-
-The RsyncBack addon is installed as usual. However you need to tell it where the rsync.exe command is located. To do that you would need to install MSYS2 which is a list of Linux commands that run as native to Windows. An open source consortium called MSYS2 created popular Linux commands that run natively on Windows. There is no need to install Linux to do that!
+The RsyncBack addon is installed as usual with [instructions above](#quick-setup-and-run-rsyncback). However you need to tell it where the rsync.exe command is located. To do that you would need to install MSYS2 which is a list of Linux commands that run as native to Windows. An open source consortium called MSYS2 created popular Linux commands that run natively on Windows. There is no need to install Linux to do that!
 
 From their documentation page at [https://www.msys2.org](https://www.google.com/url?q=https://www.msys2.org&sa=D&source=editors&ust=1752710978297009&usg=AOvVaw2IBV09jFifKjKXb5G7c51c)/:
 
@@ -98,7 +114,7 @@ In fact here is one explaining how to do it if you are using Git. [https://tlund
 
 From the article: If you didn't already know, Git for Windows and its Git Bash environment is built using [msys2](https://www.google.com/url?q=http://msys2.org/&sa=D&source=editors&ust=1752710978300813&usg=AOvVaw335tSAbpp4EALksPZui4UQ), but it doesn't include all the binaries from that project.
 
-## Backup Folders Layout and Restore
+## <ins>Backup Folders Layout and Restore<ins>
 
 As we said before, RsyncBack creates an rsync command that incrementally backs up your project to your chosen backup folder. The backup folder will always be called <project name folder>-rsync. Inside this folder the backups are copied with the name [YYYY-MM-DD][HH_MM_SS]. Also the backup folder includes another folder called logfiles, where each backup’s report is kept. See Fig A4
 
@@ -112,7 +128,7 @@ Even though it may look to you that in your latest folder the complete project w
 
 In fact every file you create is a hardlink to an inode. If you copy that file to another folder it does not duplicate it. It simply makes a directory entry pointing to what is called an inode. Inodes are beyond the scope of this document, but if you are curious about inodes read the short tutorial [rsync incremental and hard links backup concepts](https://www.google.com/url?q=https://digitalis.io/blog/linux/incremental-backups-with-rsync-and-hard-links/&sa=D&source=editors&ust=1752710978305280&usg=AOvVaw2dmUIpbxQKSH21u2SwlNOw)
 
-## Customizing the Defaults of RsynBack.
+## <ins>Customizing the Defaults of RsynBack.</ins>
 
 A new install of RsyncBack initially reads the choices from a resource file called config.tres. The user then makes the selections and runs the backup. This config.tres can be manually edited in the Inspector. The simplest way to do that is to click on the Config File label link and select Edit In Inspector (Make sure Inspector is showing in the dock). The Godot Inspector will load the config.tres resource file and allow you to make the changes manually and save the config file. Make sure you reload the plugin.
 
@@ -120,18 +136,18 @@ Hover over each of the config.tres properties and read the tooltip for more info
 
 It looks similar to this:
 
-<strong>{dry_run_argument} -avih --mkpath --stats  \
+<code>{dry_run_argument} -avih --mkpath --stats  \
  --out-format="%M %15'l %5f"  \
  --exclude-from="{exclude_file_path}" \
  --link-dest="{dest_path}/{project_name}/{prev_backup}" \
  --log-file-format="%M %15'l %5f" \
  --log-file="{log_file_path}/{current_datetime}{log_file_suffix}" \
  "{source_path}" \
- "{dest_path}/{project_name}/{current_datetime}"</strong>
+ "{dest_path}/{project_name}/{current_datetime}"</code>
 
-The curlies {} are properties replaced by RsyncBack when you run the project. In effect the above becomes something like this command which is what executes.
+The curlies {} are properties replaced by RsyncBack when you run the backup. In effect the above becomes something like this command which is what executes.
 
-<strong>/usr/local/bin/rsync  -avih --mkpath --stats  \
+<code>/usr/local/bin/rsync  -avih --mkpath --stats  \
  --out-format="%M %15'l %5f"  \
  --exclude-from="/home/user1/godot/tps-demo/addons/rsyncback/exclude.txt" \
  --link-dest="/home/user1/myback/tps-demo-rsync/[2024-10-16][13_22_37]" \
@@ -139,7 +155,7 @@ The curlies {} are properties replaced by RsyncBack when you run the project. In
  --log-file="/home/user1/myback/tps-demo-rsync/logfiles/[2024-10-18][17_07_35]_log.txt" \
  "/home/user1/godot/tps-demo/" \
  "/home/user1/myback/tps-demo-rsync/[2024-10-18][17_07_35]"
-</strong>
+</code>
 
 In fact you will see this command in the Rsync Command window. You can click and copy it to the clipboard and run it directly in the command line if you wish!
 
@@ -147,7 +163,16 @@ Notice the rsync command is added from the path you chose. Also <em>{dry_run_arg
 
 You can modify this template anyway you want. E.g. add a remote backup ssh keyfile or add –delete option. Study up on rsync if you plan to customize the template.
 
-## References:
+
+## <ins>Uninstall RsynBack</ins>
+
+Of course you may want to either disable RsyncBack or completely uninstall it. To disable the plugin click on Godot’s Menu > <em>Project > Project Settings > Plugins</em> and uncheck the RsyncBack box.
+
+To completely remove it, just delete the rsyncback plugin folder inside the addons folder of your project. This will remove the plugin. However any backups are not affected, although you should check that you did not backup anything inside the rsyncback folder you may want to keep.
+
+You may have to restart your project after deleting plugins.
+
+## <ins>References:</ins>
 
 |   |   |
 |---|---|
