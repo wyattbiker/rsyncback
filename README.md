@@ -20,7 +20,7 @@ git clone https://github.com/wyattbiker/rsyncback.git
 
 2. Open your Godot project and enable the RsyncBack plugin in Godot’s Menu > <em>Project > Project Settings > Plugins</em>
 
-3. To make a backup, click on the ![](Attachments/image2.png)RsyncBack link at the top of the editor to see the main screen. Here you select the rsync executable path, the backup path as well as some other options. The first time, you see a screen similar to Fig 1
+3. To make a backup, click on the ![](Attachments/image2.png)RsyncBack link at the top of the editor to see the main screen. Here you select the rsync executable path, the backup path as well as some other options. The first time, you see a screen similar to **Fig 1**
 
 ![](Attachments/image4.png)<p align="center"><b>Fig 1</b></p>
 
@@ -45,12 +45,13 @@ git clone https://github.com/wyattbiker/rsyncback.git
 
 ![](Attachments/image5.png)
 <p align="center"><b>Fig 3</b></p>
-8. Click on View Backup Destination Path to review your backup and the log file. You should see the backup folders similar to Fig 4<p>
 
-9. ![](Attachments/image1.png)
+8. Click on View Backup Destination Path to review your backup and the log file. You should see the backup folders similar to **Fig 4**
+
+![](Attachments/image1.png)
 <p align="center"><b>Fig 4</b></p>
 
-10. Go back to editing your project (e.g. clicking on Script). When ready to backup again click on ![](Attachments/image2.png)RsyncBack link to open the plugin screen and then click the Run Rsync button.  A new report will show only the changed files that were backed up. Clicking on the View Backup Destination Path to review the backups in that folder.
+9. Go back to editing your project (e.g. clicking on Script). When ready to backup again click on ![](Attachments/image2.png)RsyncBack link to open the plugin screen and then click the Run Rsync button.  A new report will show only the changed files that were backed up. Clicking on the View Backup Destination Path to review the backups in that folder.
 
 ## <ins>What are incremental backups using hard-links?<ins>
 
@@ -117,7 +118,7 @@ From the article: If you didn't already know, Git for Windows and its Git Bash e
 
 ## <ins>Backup Folders Layout and Restore<ins>
 
-As we said before, RsyncBack creates an rsync command that incrementally backs up your project to your chosen backup folder. The backup folder will always be called <b>\<project name folder\>-rsync</b>. Inside this folder the backups are copied with the name <b>[YYYY-MM-DD][HH_MM_SS]</b>. Also the backup folder includes another folder called logfiles, where each backup’s report is kept. <b>See Fig A4</b> below.
+As we said before, RsyncBack creates an rsync command that incrementally backs up your project to your chosen backup folder. The backup folder will always be called <b>\<project name folder\>-rsync</b>. Inside this folder the backups are copied with the name <b>[YYYY-MM-DD][HH_MM_SS]</b>. Also the backup folder includes another folder called logfiles, where each backup’s report is kept. See **Fig A4** below.
 
 The backup folders are exact ordinary folders of your project. To restore, you can copy or view using your system's File Manager.
 
