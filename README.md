@@ -12,12 +12,13 @@ The following is a quick install and backup ( See [Uninstall](#uninstall-rsynbac
 
 1. Clone directly from Github to the <em>./addons</em> folder below your project:
 ```
-cd yourproject
+cd <your Godot project>
 mkdir addons   # make addons dir if you dont have one
+cd addons
 git clone https://github.com/wyattbiker/rsyncback.git
 ```
 
-2. Open your godot project and enable the RsyncBack plugin in Godot’s Menu > <em>Project > Project Settings > Plugins</em>
+2. Open your Godot project and enable the RsyncBack plugin in Godot’s Menu > <em>Project > Project Settings > Plugins</em>
 
 3. To make a backup, click on the ![](Attachments/image2.png)RsyncBack link at the top of the editor to see the main screen. Here you select the rsync executable path, the backup path as well as some other options. The first time, you see a screen similar to Fig 1
 
@@ -116,17 +117,17 @@ From the article: If you didn't already know, Git for Windows and its Git Bash e
 
 ## <ins>Backup Folders Layout and Restore<ins>
 
-As we said before, RsyncBack creates an rsync command that incrementally backs up your project to your chosen backup folder. The backup folder will always be called <project name folder>-rsync. Inside this folder the backups are copied with the name [YYYY-MM-DD][HH_MM_SS]. Also the backup folder includes another folder called logfiles, where each backup’s report is kept. See Fig A4
+As we said before, RsyncBack creates an rsync command that incrementally backs up your project to your chosen backup folder. The backup folder will always be called <b>\<project name folder\>-rsync</b>. Inside this folder the backups are copied with the name <b>[YYYY-MM-DD][HH_MM_SS]</b>. Also the backup folder includes another folder called logfiles, where each backup’s report is kept. <b>See Fig A4</b> below.
 
 The backup folders are exact ordinary folders of your project. To restore, you can copy or view using your system's File Manager.
 
 ![](Attachments/image1.png)
 
-Fig A4.
+<p align="center"><b>Fig A4</b></p>
 
 Even though it may look to you that in your latest folder the complete project was copied, in fact what you are seeing is an image copy of the previous backup overwritten by the files that are different. This is the power of Linux/Mac file system and it is all done in the background using hardlinks. It allows for efficient disk storage and speed. Rsync does that by comparing your source folder (ie your project folder) with the latest backup then copies the changed files to the destination. The unchanged are hardlinked. The option that does this is --link-dest=”your/last/backup/folder”  See example command below.
 
-In fact every file you create is a hardlink to an inode. If you copy that file to another folder it does not duplicate it. It simply makes a directory entry pointing to what is called an inode. Inodes are beyond the scope of this document, but if you are curious about inodes read the short tutorial [rsync incremental and hard links backup concepts](https://www.google.com/url?q=https://digitalis.io/blog/linux/incremental-backups-with-rsync-and-hard-links/&sa=D&source=editors&ust=1752710978305280&usg=AOvVaw2dmUIpbxQKSH21u2SwlNOw)
+In fact every file you create is a hardlink to an inode. If you copy that file to another folder it does not duplicate it. It simply makes a directory entry pointing to what is called an inode. Inodes are beyond the scope of this document, but if you are curious about inodes read this short writeup I found [https://albertoalcolea.com/blog/incremental-backups-with-rsync-+-hard-links](https://albertoalcolea.com/blog/incremental-backups-with-rsync-+-hard-links/)
 
 ## <ins>Customizing the Defaults of RsynBack.</ins>
 
@@ -182,7 +183,7 @@ You may have to restart your project after deleting plugins.
 |Official Website|[https://rsync.samba.org](https://www.google.com/url?q=https://rsync.samba.org&sa=D&source=editors&ust=1752710978312072&usg=AOvVaw25CHlN9F1bTtMpuzVnW1u7)|
 |rsync man page|[https://ss64.com/bash/rsync.html](https://www.google.com/url?q=https://ss64.com/bash/rsync.html&sa=D&source=editors&ust=1752710978312695&usg=AOvVaw2iYK5ejJnbxcPtT15k0n-v)|
 |Command line tutorial/Examples|[https://www.geeksforgeeks.org/rsync-command-in-linux-with-examples/](https://www.google.com/url?q=https://www.geeksforgeeks.org/rsync-command-in-linux-with-examples/&sa=D&source=editors&ust=1752710978313395&usg=AOvVaw2jHyTD_11nu4whroMVjCb7)|
-|rsync incremental and hard links backup concepts|[https://digitalis.io/blog/linux/incremental-backups-with-rsync-and-hard-links/](https://www.google.com/url?q=https://digitalis.io/blog/linux/incremental-backups-with-rsync-and-hard-links/&sa=D&source=editors&ust=1752710978314098&usg=AOvVaw07zz477f_5QuOstVr4SzCb)|
+|Incremental backups with rsync + hard links|[https://albertoalcolea.com/blog/incremental-backups-with-rsync-+-hard-links/](https://albertoalcolea.com/blog/incremental-backups-with-rsync-+-hard-links/)|
 |Installing rsync for Windows.|[https://www.msys2.org/](https://www.google.com/url?q=https://www.msys2.org/&sa=D&source=editors&ust=1752710978314618&usg=AOvVaw0Mjlx0uL2EENfNgSCe6qRc)|
 
 
