@@ -1,5 +1,5 @@
 
-<h1 align="center"><img src="Attachments/image2.png">RsyncBack Godot Plugin Documentation</img></h1>
+<h1 style="background-color: coral;" align="center"><img src="Attachments/image2.png">RsyncBack Godot Plugin Documentation</img></h1>
 
 <h1 align="center">For Linux, MacOSX and Windows(*)</h1>
 
