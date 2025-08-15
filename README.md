@@ -35,7 +35,6 @@ git clone https://github.com/wyattbiker/rsyncback.git
 6. Click on the Exclude File and edit any patterns of files you want to exclude from backup. One line per pattern
 
 - Example to exclude .godot, or any .git folders or any files with an extension of .import.
-  
 <pre style="display: inline;">
 .godot
 .git*
