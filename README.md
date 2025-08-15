@@ -34,12 +34,12 @@ git clone https://github.com/wyattbiker/rsyncback.git
 
 6. Click on the Exclude File and edit any patterns of files you want to exclude from backup. One line per pattern
 
-- Example to exclude .godot, or any .git folders or any files with an extension of .import.
-<pre style="display: inline;">
+- Example to exclude .godot, or any .git folders or any files with an extension of .import:
+```
 .godot
 .git*
 *.import
-</pre>
+```
 
 7. To start the backup, click on the Run Rsync button and a popup report will show your project files backed up. The first backup is the longest as the complete project folder is backed up. See example **Fig 3**.
 
@@ -52,13 +52,13 @@ git clone https://github.com/wyattbiker/rsyncback.git
 
 10. Go back to editing your project (e.g. clicking on Script). When ready to backup again click on ![](Attachments/image2.png)RsyncBack link to open the plugin screen and then click the Run Rsync button.  A new report will show only the changed files that were backed up. Clicking on the View Backup Destination Path to review the backups in that folder.
 
-## What are incremental backups using hard-links?
+## <ins>What are incremental backups using hard-links?<ins>
 
-Incremental backups in the case of RsyncBack (using rsync), is when only changed files in your project are backed up to a new date-time stamped folder. In addition hard-links are created in that same backed folder to the unchanged files. In essense, your backup folder looks like a complete backup, but the backup is not only quick, but also takes much less storage
+Incremental backups in the case of RsyncBack (using rsync), is when only changed files in your project are backed up to a new date-time stamped folder. In addition hard-links ([https://en.wikipedia.org/wiki/Hard_link](https://en.wikipedia.org/wiki/Hard_link)) are created in that same backed folder to the unchanged files. In essense, your backup folder looks like a complete backup, but the backup is not only fast, but also takes much less storage.
 
 ## <ins>What is rsync?<ins>
 
-Rsync is one of the most popular and stable open source backup tools included with Linux and MacOSX (Windows see below [Windows Users](#windows-users)). It is a terminal run tool with numerous options and arguments for backing up your computer folders incremental/differential, It has been battle tested for years now, is very reliable and has great community support. In its basic form it is a copy/sync tool, in that it copies files from source folder to a destination folder. Rsync backs up files using the native file system of your computer. It does not have its own compressed or proprietary database. You can easily use your File Manager to restore with drag and drop any backup folder or individual files. You can of course view them as regular files using your favorite File Manager. For Linux it could be Dolphin/Nemo/etc and Mac it could be Finder. Or it could be the command line using ls. 
+Rsync is one of the most popular and stable open source backup tools included with Linux and MacOSX (Windows see below [Windows Users](#windows-users)). It is a terminal run tool with numerous options and arguments for backing up your computer folders incremental/differential, It has been battle tested for years now, is very reliable and has great community support. In its basic form it is a copy/sync tool, in that it copies files from source folder to a destination folder. Rsync backs up files using the native file system of your computer. It does not have its own compressed or proprietary database. You can easily use your File Manager to restore with drag and drop any backup folder or individual files. You can of course view them as regular files using your favorite File Manager. For Linux it could be Dolphin/Nemo/etc and Mac it could be Finder. Or it could be the command line using <b>ls</b>. 
 
 ## <ins>What is the purpose of the RsyncBack plugin.</ins>
 
