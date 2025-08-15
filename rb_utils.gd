@@ -1,12 +1,16 @@
 class_name Utils
 
+#
 # Use this class when you want to return either a value or an error code/description.
+#
 class Result:
 	var code: int=0   # Error Code
 	var description: String="" # Error Message
 	var value: Variant # Value if no error
 
+#
 # Use this class to verify version format and minimums.
+#
 class Version:
 	var res: Result=Result.new()
 	enum {VERSION=0, MAJOR=1, MINOR=2, PATCH=3}
