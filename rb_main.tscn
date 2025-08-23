@@ -1,0 +1,766 @@
+[gd_scene load_steps=39 format=3 uid="uid://sw8kouwk8fh2"]
+
+[ext_resource type="Script" uid="uid://b434mykbnoi7n" path="res://addons/rsyncback/rb_main.gd" id="1_m53aq"]
+[ext_resource type="Texture2D" uid="uid://dsmrsh80u4go2" path="res://addons/rsyncback/assets/question.png" id="2_lbmv2"]
+[ext_resource type="Theme" uid="uid://dtp63ohf7alft" path="res://addons/rsyncback/theme/theme.tres" id="4_8jug7"]
+[ext_resource type="Texture2D" uid="uid://c67mjkptg4qtc" path="res://addons/rsyncback/assets/duplicate.png" id="4_rcfp5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_af42v"]
+content_margin_left = 10.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="Theme" id="Theme_5k82g"]
+Button/colors/font_hover_color = Color(0.160784, 0.94902, 0.94902, 1)
+TooltipLabel/styles/normal = SubResource("StyleBoxFlat_af42v")
+
+[sub_resource type="GDScript" id="GDScript_7w1kq"]
+script/source = "@tool
+extends Button
+#
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="SystemFont" id="SystemFont_cykc1"]
+font_names = PackedStringArray("Monospace")
+subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_5b86u"]
+font_names = PackedStringArray("Monospace")
+subpixel_positioning = 0
+
+[sub_resource type="Image" id="Image_8jug7"]
+data = {
+"data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 96, 255, 255, 255, 97, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 96, 255, 255, 255, 97, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 96, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 97, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 96, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 97, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 97, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 97, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 96, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 96, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 97, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 97, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 96, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 96, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 97, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 97, 255, 255, 255, 96, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 96, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 97, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 96, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 97, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 96, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 96, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 97, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 96, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 97, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 96, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 96, 255, 255, 255, 97, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 97, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 96, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 96, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 97, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 97, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 96, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 96, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 97, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 97, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 97, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 96, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 97, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 96, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 97, 255, 255, 255, 96, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 97, 255, 255, 255, 96, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
+"format": "RGBA8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_bakjt"]
+image = SubResource("Image_8jug7")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kabwh"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_osco3"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibig1"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.133333, 0.133333, 0.133333, 0.133333)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1yg2"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlabt"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="SystemFont" id="SystemFont_v148x"]
+font_names = PackedStringArray("Andale Mono")
+font_weight = 200
+subpixel_positioning = 0
+
+[sub_resource type="Theme" id="Theme_w7420"]
+default_font_size = 19
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_disabled_color = Color(0, 0, 0, 1)
+Button/colors/icon_focus_color = Color(0, 0, 0, 1)
+Button/colors/icon_hover_color = Color(0, 0, 0, 1)
+Button/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_normal_color = Color(0, 0, 0, 1)
+Button/colors/icon_pressed_color = Color(0, 0, 0, 1)
+Button/constants/h_separation = 0
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 20
+Button/fonts/font = SubResource("SystemFont_cykc1")
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+CheckBox/colors/font_color = Color(0, 0, 0, 1)
+CheckBox/colors/font_disabled_color = Color(0, 0, 0, 1)
+CheckBox/colors/font_focus_color = Color(0, 0, 0, 1)
+CheckBox/colors/font_hover_color = Color(0, 0, 0, 1)
+CheckBox/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+CheckBox/colors/font_outline_color = Color(0, 0, 0, 1)
+CheckBox/colors/font_pressed_color = Color(0, 0, 0, 1)
+CheckBox/constants/check_v_offset = 0
+CheckBox/constants/h_separation = 0
+CheckBox/constants/outline_size = 0
+CheckBox/font_sizes/font_size = 16
+CheckBox/fonts/font = SubResource("SystemFont_cykc1")
+CheckBox/icons/checked = null
+CheckBox/icons/checked_disabled = null
+CheckBox/icons/radio_checked = null
+CheckBox/icons/radio_checked_disabled = null
+CheckBox/icons/radio_unchecked = null
+CheckBox/icons/radio_unchecked_disabled = null
+CheckBox/icons/unchecked = null
+CheckBox/icons/unchecked_disabled = null
+CheckBox/styles/disabled = null
+CheckBox/styles/focus = null
+CheckBox/styles/hover = null
+CheckBox/styles/hover_pressed = null
+CheckBox/styles/normal = null
+CheckBox/styles/pressed = null
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/line_spacing = 0
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 0
+Label/constants/shadow_outline_size = 0
+Label/font_sizes/font_size = 20
+Label/fonts/font = SubResource("SystemFont_cykc1")
+Label/styles/normal = null
+LineEdit/colors/caret_color = Color(0, 0, 0, 1)
+LineEdit/colors/clear_button_color = Color(0, 0, 0, 1)
+LineEdit/colors/clear_button_color_pressed = Color(0, 0, 0, 1)
+LineEdit/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_outline_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_placeholder_color = Color(0.913725, 0.321569, 0.317647, 1)
+LineEdit/colors/font_selected_color = Color(0, 0, 0, 1)
+LineEdit/colors/font_uneditable_color = Color(0, 0.829379, 0.816287, 1)
+LineEdit/colors/selection_color = Color(0.5, 0.5, 0.5, 1)
+LineEdit/constants/caret_width = 0
+LineEdit/constants/minimum_character_width = 0
+LineEdit/constants/outline_size = 0
+LineEdit/font_sizes/font_size = 19
+LineEdit/fonts/font = SubResource("SystemFont_5b86u")
+LineEdit/icons/clear = SubResource("ImageTexture_bakjt")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_kabwh")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_osco3")
+LineEdit/styles/read_only = SubResource("StyleBoxFlat_ibig1")
+RichTextLabel/styles/background = SubResource("StyleBoxFlat_b1yg2")
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_mlabt")
+TextEdit/colors/caret_color = Color(0.875, 0.875, 0.875, 1)
+TextEdit/colors/font_color = Color(1, 1, 1, 1)
+TextEdit/colors/font_readonly_color = Color(1, 1, 1, 1)
+TextEdit/fonts/font = SubResource("SystemFont_v148x")
+
+[sub_resource type="GDScript" id="GDScript_rcxjj"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_1xvmi"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+
+# Optional callback to customize tooltip_type 
+# before displayed.
+# Example:
+#func _customize_tooltip(tooltip_type: Control):
+	#tooltip_type.pivot_offset=tooltip_type.position+tooltip_type.size/2
+	#tooltip_type.rotation_degrees=180
+	#return
+	
+"
+
+[sub_resource type="GDScript" id="GDScript_c77qg"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v2csw"]
+content_margin_left = 30.0
+
+[sub_resource type="GDScript" id="GDScript_nx7ps"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_e2mc6"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_hsguv"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_7102h"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_iqoq0"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rmc3x"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="GDScript" id="GDScript_vjk13"]
+script/source = "@tool
+extends RichTextLabel
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hf5k0"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="GDScript" id="GDScript_4jodg"]
+script/source = "@tool
+extends Button
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2x32p"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0.779291, 0.779291, 0.779291, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+
+[sub_resource type="GDScript" id="GDScript_i0d81"]
+script/source = "@tool
+extends Button
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_ul4tl"]
+script/source = "@tool
+extends CheckBox
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_m713n"]
+script/source = "@tool
+extends Label
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_tamvc"]
+script/source = "@tool
+extends Button
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="GDScript" id="GDScript_gw74g"]
+script/source = "@tool
+extends Button
+
+const tooltip_name=\"RichTextLabel\"
+func _make_custom_tooltip(for_text: String):
+	return owner.make_custom_tooltip(for_text, tooltip_name, self)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26d1e"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="RsyncMain" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_5k82g")
+script = ExtResource("1_m53aq")
+metadata/_edit_vertical_guides_ = [-38.0]
+
+[node name="RSyncBackupVesion" type="Label" parent="."]
+layout_mode = 0
+offset_left = 998.0
+offset_top = 6.0
+offset_right = 1108.0
+offset_bottom = 29.0
+text = "Version"
+horizontal_alignment = 1
+
+[node name="Help" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 812.0
+offset_top = 3.0
+offset_right = 846.0
+offset_bottom = 49.0
+tooltip_text = "[center][u][color=lightblue]RsyncBack Quick Start instructions for Linux and MacOSX[/color][/u][/center]
+
+[color=orange]Note:[/color] Hovering mouse over the underlined links and buttons will show more details.
+
+[u][color=lightblue]Preparing to use RsyncBack[/color][/u]
+Make sure rsync is installed on your system. You can check from the command line by running [b]which rsync[/b] to show you the default and [b]whereis rsync[/b] to check if there are more than one installed.
+
+[u][color=lightblue]Making a backup.[/color][/u]
+[ol type=1]
+Select the rsync binary command by clicking [b][u]Rsync Cmd Path[/u][/b].
+Select or create a backup folder, by clicking [b][u]Backup Destination Path[/u][/b]. Must be outside of your project folder.
+View/edit excludes by clicking on [b][u]Exclude File[/u][/b]. To exclude use either exact folder/file names or wildcards. See rsync documentation if you need more details.
+If there were no error messages, you can review the rsync command generated. Run it by clicking [b]Run Rsync[/b] button. A report will display showing which files were backed up. You can also review the backup file by clicking on Log [b][u]File Path[/u][/b] and the backup by clicking on [b][u]Open Destination Path[/u][/b]
+[/ol]
+
+[center]For more info on rsync click [url]https://rsync.samba.org[/url][/center]
+"
+icon = ExtResource("2_lbmv2")
+expand_icon = true
+script = SubResource("GDScript_7w1kq")
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 455.0
+offset_top = 12.0
+offset_right = 794.0
+offset_bottom = 45.0
+focus_mode = 2
+theme = SubResource("Theme_w7420")
+bbcode_enabled = true
+text = "[center]RSyncBack Project Backup[/center]"
+fit_content = true
+selection_enabled = true
+
+[node name="Instructions" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 59.0
+offset_right = 410.0
+offset_bottom = 88.0
+theme = ExtResource("4_8jug7")
+bbcode_enabled = true
+text = "[color=lightblue]Hover/Click on labels for instructions[/color]"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 89.0
+offset_right = 1120.0
+offset_bottom = 346.0
+theme_override_constants/separation = 0
+
+[node name="SourcePath" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_w7420")
+placeholder_text = "Source code path"
+editable = false
+
+[node name="SourcePathClick" type="RichTextLabel" parent="VBoxContainer/SourcePath"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -259.0
+offset_top = 4.0
+offset_right = -9.0
+offset_bottom = 32.0
+tooltip_text = "Click to view the project files in File Manager."
+theme = SubResource("Theme_w7420")
+bbcode_enabled = true
+text = "[right][url]Project Source Path:[/url][/right]"
+script = SubResource("GDScript_rcxjj")
+
+[node name="RsyncCmdPath" type="LineEdit" parent="VBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+theme = SubResource("Theme_w7420")
+placeholder_text = "Click label to choose rsync_cmd_path"
+editable = false
+
+[node name="RsyncCmdPathClick" type="RichTextLabel" parent="VBoxContainer/RsyncCmdPath"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = -259.0
+offset_top = 4.0
+offset_right = -9.0
+offset_bottom = 32.0
+theme = SubResource("Theme_w7420")
+bbcode_enabled = true
+text = "[right][url]RSync Cmd Path:[/url][/right]"
+fit_content = true
+script = SubResource("GDScript_1xvmi")
+
+[node name="DestPath" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_w7420")
+placeholder_text = "Click label to choose a valid backup destination folder"
+editable = false
+
+[node name="DestPathClick" type="RichTextLabel" parent="VBoxContainer/DestPath"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -259.0
+offset_top = 4.0
+offset_right = -9.0
+offset_bottom = 32.0
+theme = SubResource("Theme_w7420")
+bbcode_enabled = true
+text = "[right][url]Backup Destination Path:[/url][/right]"
+fit_content = true
+script = SubResource("GDScript_c77qg")
+
+[node name="PrevBackup" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_w7420")
+theme_override_colors/font_uneditable_color = Color(1, 0, 0, 1)
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_v2csw")
+text = "No Previous Backup found yet"
+editable = false
+
+[node name="PrevBackupClick" type="RichTextLabel" parent="VBoxContainer/PrevBackup"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = -259.0
+offset_top = 4.0
+offset_right = -9.0
+offset_bottom = 32.0
+tooltip_text = "Click to see the Previous Backup, if one exists in the Backup Destination Path. The Previous Backup is compared to the current source and a new incremental backup folder is created using  current datetime name."
+theme = SubResource("Theme_w7420")
+bbcode_enabled = true
+text = "[right][url]Previous Backup:[/url][/right]"
+fit_content = true
+script = SubResource("GDScript_nx7ps")
+
+[node name="LogFilePath" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_w7420")
+theme_override_colors/font_uneditable_color = Color(1, 0, 0, 1)
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_v2csw")
+text = "No Log File Path yet."
+editable = false
+
+[node name="LogFilePathClick" type="RichTextLabel" parent="VBoxContainer/LogFilePath"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = -259.0
+offset_top = 4.0
+offset_right = -9.0
+offset_bottom = 32.0
+tooltip_text = "Click to view logfiles if present. 
+Logfiles are created in same folder as Destination Path"
+theme = SubResource("Theme_w7420")
+bbcode_enabled = true
+text = "[right][url]Log File Path:[/url][/right]"
+fit_content = true
+script = SubResource("GDScript_e2mc6")
+
+[node name="ExcludeFilePath" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_w7420")
+placeholder_text = "Click label to choose exclude_file_path"
+editable = false
+
+[node name="ExcludeFilePathClick" type="RichTextLabel" parent="VBoxContainer/ExcludeFilePath"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = -259.0
+offset_top = 4.0
+offset_right = -9.0
+offset_bottom = 32.0
+theme = SubResource("Theme_w7420")
+bbcode_enabled = true
+text = "[right][url]Exclude File:[/url][/right]"
+fit_content = true
+script = SubResource("GDScript_hsguv")
+
+[node name="ConfigFile" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_w7420")
+placeholder_text = "Path to Config File. "
+editable = false
+
+[node name="ConfigFileClick" type="RichTextLabel" parent="VBoxContainer/ConfigFile"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = -259.0
+offset_top = 4.0
+offset_right = -9.0
+offset_bottom = 32.0
+theme = SubResource("Theme_w7420")
+bbcode_enabled = true
+text = "[right][url]Config File:[/url][/right]"
+fit_content = true
+script = SubResource("GDScript_7102h")
+
+[node name="RSyncCommandLabel" type="RichTextLabel" parent="."]
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = 508.0
+offset_top = 350.0
+offset_right = 669.0
+offset_bottom = 377.0
+tooltip_text = "Display of the actual rsync command that will execute when Run Rsync is clicked. [p]Otherwise a message will appear if there was a problem.  Click on View Messages for details."
+theme = SubResource("Theme_w7420")
+bbcode_enabled = true
+text = "RSync Command"
+fit_content = true
+script = SubResource("GDScript_iqoq0")
+
+[node name="RSyncCommand" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = 75.0
+offset_top = 384.0
+offset_right = 1125.0
+offset_bottom = 562.0
+focus_mode = 2
+theme = SubResource("Theme_w7420")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_rmc3x")
+bbcode_enabled = true
+text = "
+[center][color=#ff0000][b]Check Configuration. Click View Messages button for more info.[/b][/color][/center]"
+autowrap_mode = 1
+selection_enabled = true
+script = SubResource("GDScript_vjk13")
+
+[node name="ClipboardButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 667.0
+offset_top = 331.0
+offset_right = 716.0
+offset_bottom = 383.0
+tooltip_text = "Copy RSync Command to clipboard to manually execute from command line or terminal."
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hf5k0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_hf5k0")
+icon = ExtResource("4_rcfp5")
+flat = true
+expand_icon = true
+script = SubResource("GDScript_4jodg")
+
+[node name="Label" type="Label" parent="ClipboardButton"]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = -21.0
+offset_right = 296.0
+offset_bottom = 2.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2x32p")
+text = "RSync Command copied to clipboard."
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 571.0
+offset_right = 1068.0
+offset_bottom = 611.0
+theme = SubResource("Theme_w7420")
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="RunBackup" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Save settings and run the backup. Only available if there are no error messages with configuration.. Click [b] View Messages [/b] button to make corrections."
+disabled = true
+text = "Run Rsync"
+script = SubResource("GDScript_i0d81")
+
+[node name="DryRun" type="CheckBox" parent="HBoxContainer/RunBackup"]
+layout_mode = 1
+offset_left = -71.0
+offset_top = 1.0
+offset_right = -46.0
+offset_bottom = 33.0
+script = SubResource("GDScript_ul4tl")
+
+[node name="Label" type="Label" parent="HBoxContainer/RunBackup/DryRun"]
+layout_mode = 1
+offset_left = -103.0
+offset_right = 3.0
+offset_bottom = 32.0
+tooltip_text = "This is the equivalent of --dry-run argument for rsync.
+Checking this allows you to test the backup. When done you will be able to inspect the log, however no backup is made."
+mouse_filter = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Dry Run:"
+script = SubResource("GDScript_m713n")
+
+[node name="ViewMessages" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 2
+tooltip_text = "Show  error messages with the configuration if any."
+theme_override_colors/font_color = Color(0.976471, 0, 0, 1)
+disabled = true
+text = "View Messages"
+script = SubResource("GDScript_tamvc")
+
+[node name="Cancel" type="Button" parent="HBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+tooltip_text = "Disable  RsyncBack plugin. Enable it in Project Settings > Plugins"
+text = "Disable"
+script = SubResource("GDScript_gw74g")
+
+[node name="StatusMessage" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 83.0
+offset_top = 349.0
+offset_right = 489.0
+offset_bottom = 382.0
+theme = SubResource("Theme_w7420")
+bbcode_enabled = true
+text = "[pulse freq=1 color=red ease=0]Backing Up. Please Wait...[/pulse]
+"
+fit_content = true
+
+[node name="OpenFileManagerClicked" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = 819.0
+offset_top = 350.0
+offset_right = 1107.0
+offset_bottom = 378.0
+tooltip_text = "Click to view backup destination in File Manager, if present. Logfiles are created in same folder as Destination Path"
+theme = SubResource("Theme_w7420")
+theme_override_styles/normal = SubResource("StyleBoxFlat_26d1e")
+bbcode_enabled = true
+text = "[url]View Backup Destination Path[/url]"
+fit_content = true
+script = SubResource("GDScript_e2mc6")
+
+[connection signal="pressed" from="Help" to="." method="_on_help_pressed"]
+[connection signal="meta_clicked" from="VBoxContainer/SourcePath/SourcePathClick" to="." method="_on_source_path_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/RsyncCmdPath/RsyncCmdPathClick" to="." method="_on_rsync_cmd_path_click_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/DestPath/DestPathClick" to="." method="_on_dest_path_click_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/PrevBackup/PrevBackupClick" to="." method="_on_prev_backup_click_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/LogFilePath/LogFilePathClick" to="." method="_on_log_file_path_click_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/ExcludeFilePath/ExcludeFilePathClick" to="." method="_on_exclude_file_view_click_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/ConfigFile/ConfigFileClick" to="." method="_on_config_view_meta_clicked"]
+[connection signal="pressed" from="ClipboardButton" to="." method="_on_clipboard_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/RunBackup" to="." method="_on_run_backup_pressed"]
+[connection signal="toggled" from="HBoxContainer/RunBackup/DryRun" to="." method="_on_dry_run_toggled"]
+[connection signal="pressed" from="HBoxContainer/ViewMessages" to="." method="_on_view_messages_pressed"]
+[connection signal="pressed" from="HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="meta_clicked" from="StatusMessage" to="." method="_on_status_message_meta_clicked"]
+[connection signal="meta_clicked" from="OpenFileManagerClicked" to="." method="_on_open_file_manager_meta_clicked"]

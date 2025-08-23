@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2wv8itqusxmc"]
+
+[ext_resource type="Theme" uid="uid://coonh2sojlo8w" path="res://addons/rsyncback/theme/file_dialog.tres" id="1_ibdqp"]
+
+[sub_resource type="GDScript" id="GDScript_tipmj"]
+script/source = "@tool
+extends FileDialog
+
+var file_dialog: FileDialog
+
+func _init():
+	file_dialog=self
+	file_dialog.mode=Window.MODE_WINDOWED
+	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
+	file_dialog.visible = true 
+	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
+	file_dialog.title=\"Select A Backup Destination Folder\"
+	file_dialog.use_native_dialog = false
+	set_dialogs_to_modal(file_dialog)	
+
+func _ready():
+	file_dialog.size *= 0.9
+	file_dialog.popup_centered()
+
+func set_dialogs_to_modal(this: FileDialog):
+	var node_list=this.get_children(true)	
+	for node in node_list:
+		if node.is_class(\"ConfirmationDialog\") or node.is_class(\"AcceptDialog\"):
+			return
+			#node.always_on_top=true
+
+func _update_window():
+	# Center the display window
+	#position = (DisplayServer.screen_get_size() - view_port.size) * 0.5
+	pass
+"
+
+[node name="FileDialog" type="FileDialog"]
+title = "Select A Backup Destination Folder"
+initial_position = 2
+size = Vector2i(810, 648)
+visible = true
+theme = ExtResource("1_ibdqp")
+ok_button_text = "Select Current Folder"
+dialog_hide_on_ok = true
+file_mode = 2
+access = 2
+script = SubResource("GDScript_tipmj")

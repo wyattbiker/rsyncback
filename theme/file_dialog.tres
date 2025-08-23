@@ -1,0 +1,12 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://coonh2sojlo8w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_okh28"]
+bg_color = Color(0.215902, 0.215902, 0.215902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+
+[resource]
+FileDialog/styles/panel = SubResource("StyleBoxFlat_okh28")

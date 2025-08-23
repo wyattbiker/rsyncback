@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="DefaultConfig" load_steps=2 format=3 uid="uid://7mbv5jbdtx2w"]
+
+[ext_resource type="Script" uid="uid://ca4fsu6fu3ft3" path="res://addons/rsyncback/resource/default_config.gd" id="1_yxj14"]
+
+[resource]
+script = ExtResource("1_yxj14")
+dest_path = ""
+exclude_file_path = "exclude.txt"
+time_stamp_format = "[%04d-%02d-%02d][%02d_%02d_%02d]"
+rsync_min_version = "3.2.4"
+log_file_suffix = "_log.txt"
+log_file_path = ""
+rsync_cmd_path = "rsync"
+dry_run_argument = "--dry-run"
+rsync_template = "{dry_run_argument} -avih --mkpath --stats  \\
+ --out-format=\"%M %15'l %5f\"  \\
+ --exclude-from=\"{exclude_file_path}\" \\
+ --link-dest=\"{dest_path}/{project_name}/{prev_backup}\" \\
+ --log-file-format=\"%M %15'l %5f\" \\
+ --log-file=\"{log_file_path}/{current_datetime}{log_file_suffix}\" \\
+ \"{source_path}\" \\
+ \"{dest_path}/{project_name}/{current_datetime}\" "

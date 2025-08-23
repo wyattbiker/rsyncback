@@ -1,0 +1,169 @@
+[gd_scene load_steps=6 format=3 uid="uid://fl2ftxr1pvto"]
+
+[ext_resource type="FontFile" uid="uid://cjplr6300ih3d" path="res://addons/rsyncback/fonts/FreeMono.ttf" id="1_d3vpt"]
+
+[sub_resource type="Theme" id="Theme_mgcvv"]
+
+[sub_resource type="GDScript" id="GDScript_5l47s"]
+script/source = "@tool
+extends Window
+class_name TextEditor
+
+var default_action: bool=false
+var current_button: Button
+var button_count = 1
+@export var color_selected: Color = 0x000000a7
+
+@warning_ignore(\"shadowed_variable_base_class\")
+func with_data(text:String=\"\", title:String=\"Text Editor\", color:=Color.BLACK) -> Window:
+	self.title=title
+	#%TextEditContent.insert_text(text,0,0)
+	%TextEditContent.text=text
+	var sb:StyleBoxFlat = %TextEditContent.get_theme_stylebox(\"normal\")
+	sb.bg_color=color
+	%TextEditContent.add_theme_stylebox_override(\"normal\", sb)
+	return self
+
+func _ready():
+	reset_buttons_theme()
+	select_button(%OKButton,1, color_selected)
+	current_button=%OKButton
+	%TextEditContent.grab_focus()
+	pass
+	
+func get_textedit_content() -> String:
+	return %TextEditContent.text
+
+func select_button(btn: Button, border_size: int, bg_color: Color=Color.TRANSPARENT):
+	var sb:=StyleBoxFlat.new()
+	sb.set_border_width_all(border_size)
+	sb.bg_color=bg_color
+	btn.add_theme_stylebox_override(\"normal\", sb)
+
+# Add an action button, and set the default
+func add_action(title: String, action: String=\"OK\", default_action: bool = false):
+	var btn=add_button(title, action, button_count)
+	if default_action:
+		reset_buttons_theme()
+		select_button(btn, 1, color_selected)
+		current_button=btn
+	else:
+		select_button(btn, 0, Color.TRANSPARENT)
+	button_count = %ButtonContainer.get_child_count()
+	return btn
+
+func reset_buttons_theme():
+	for btns in %ButtonContainer.get_children():
+		select_button(btns, 0, Color.TRANSPARENT)
+
+# Build a clone of OK button and then modify.
+func add_button(title: String, action:String, button_count:int):
+	var btn:Button = Button.new() # %ButtonContainer/OK.duplicate()
+	btn.text=title
+	btn.name=\"Action\" + str(button_count).lstrip(\" \")
+	btn.unique_name_in_owner=true
+	btn.pressed.connect(_on_action_selected.bind(action))
+	%ButtonContainer.add_child(btn)
+	btn.owner=$\".\"
+	return btn
+
+signal action_selected(action)
+func _on_action_selected(action: String):
+	emit_signal(\"action_selected\", action)
+	pass # Replace with function body.
+
+
+func _input(event:InputEvent):
+	var ev:InputEventKey
+	if event is InputEventKey and event.is_pressed():
+		ev = event
+		if ev.keycode == KEY_ESCAPE:
+			_on_action_selected(\"ESCAPE\")
+		if ev.keycode == KEY_ENTER && not %TextEditContent.has_focus():
+			current_button.emit_signal(\"pressed\")
+		if ev.keycode == KEY_LEFT:
+			var ix=current_button.get_index()
+			if ix > 0:
+				reset_buttons_theme()
+				select_button(current_button, 0, Color.TRANSPARENT)
+				current_button=%ButtonContainer.get_child(ix-1)
+				select_button(current_button, 1, color_selected)
+		if ev.keycode == KEY_RIGHT:
+			var ix=current_button.get_index()
+			if ix < button_count-1:
+				reset_buttons_theme()
+				select_button(current_button, 0, Color.TRANSPARENT)
+				current_button=%ButtonContainer.get_child(ix+1)
+				select_button(current_button, 1, color_selected)
+			pass
+
+
+var text_changed = false
+func _on_text_edit_content_text_changed():
+	text_changed = true
+	pass # Replace with function body.
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsrb7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0.180392, 0.286275, 0.447059)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nb7ch"]
+bg_color = Color(0, 0, 0, 0.654902)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[node name="TextEdit" type="Window"]
+position = Vector2i(0, 36)
+size = Vector2i(700, 500)
+exclusive = true
+theme = SubResource("Theme_mgcvv")
+script = SubResource("GDScript_5l47s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextEditContent" type="TextEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_readonly_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_d3vpt")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wsrb7")
+editable = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 40
+
+[node name="OKButton" type="Button" parent="VBoxContainer/ButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_nb7ch")
+text = "Cancel"
+
+[connection signal="close_requested" from="." to="." method="_on_action_selected" binds= [&"CLOSE"]]
+[connection signal="text_changed" from="VBoxContainer/TextEditContent" to="." method="_on_text_edit_content_text_changed"]
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/OKButton" to="." method="_on_action_selected" binds= [&"OKBUTTON"]]

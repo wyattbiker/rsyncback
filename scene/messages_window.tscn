@@ -1,0 +1,163 @@
+[gd_scene load_steps=6 format=3 uid="uid://c60e5xxjgbog3"]
+
+[sub_resource type="Theme" id="Theme_mgcvv"]
+
+[sub_resource type="GDScript" id="GDScript_d4yxd"]
+script/source = "@tool
+extends Window
+
+var default_action: bool=false
+var current_button: Button
+var button_count = 1
+@export var color_selected: Color = 0x000000a7
+
+@warning_ignore(\"shadowed_variable_base_class\")
+func with_data(text:String=\"Alert Alert!\", title:String=\"Messages\", color:=Color.BLACK) -> Window:
+	self.title=title
+	%MessagesContent.text=text
+	var sb:StyleBoxFlat = %MessagesContent.get_theme_stylebox(\"normal\")
+	sb.bg_color=color
+	%MessagesContent.add_theme_stylebox_override(\"normal\", sb)
+	return self
+
+func _ready():
+	reset_buttons_theme()
+	select_button(%OKButton,1, color_selected)
+	current_button=%OKButton
+	pass
+	
+func select_button(btn: Button, border_size: int, bg_color: Color=Color.TRANSPARENT):
+	var sb:=StyleBoxFlat.new()
+	sb.set_border_width_all(border_size)
+	sb.bg_color=bg_color
+	btn.add_theme_stylebox_override(\"normal\", sb)
+
+# Add an action button, and set the default
+func add_action(title: String, action: String=\"OK\", default_action: bool = false):
+	var btn=add_button(title, action, button_count)
+	if default_action:
+		reset_buttons_theme()
+		select_button(btn, 1, color_selected)
+		current_button=btn
+	else:
+		select_button(btn, 0, Color.TRANSPARENT)
+	button_count = %ButtonContainer.get_child_count()
+	return btn
+
+func reset_buttons_theme():
+	for btns in %ButtonContainer.get_children():
+		select_button(btns, 0, Color.TRANSPARENT)
+
+# Build a clone of OK button and then modify.
+func add_button(title: String, action:String, button_count:int):
+	var btn:Button = Button.new() # %ButtonContainer/OK.duplicate()
+	btn.text=title
+	btn.name=\"Action\" + str(button_count).lstrip(\" \")
+	btn.unique_name_in_owner=true
+	btn.pressed.connect(_on_action_selected.bind(action))
+	%ButtonContainer.add_child(btn)
+	btn.owner=$\".\"
+	return btn
+
+signal action_selected(action)
+func _on_action_selected(action: String):
+	emit_signal(\"action_selected\", action)
+	pass # Replace with function body.
+	
+	## Center of parent
+	##var center = Vector2(position) + size / 2.0
+	##var pos:Vector2
+	##pos=center-(%ActionConfirm.size / 2.0)
+
+func _input(event:InputEvent):
+	var ev:InputEventKey
+	if event is InputEventKey and event.is_pressed():
+		ev = event
+		if ev.keycode == KEY_ESCAPE:
+			_on_action_selected(\"ESCAPE\")
+		if ev.keycode == KEY_ENTER:
+			current_button.emit_signal(\"pressed\")
+		if ev.keycode == KEY_LEFT:
+			var ix=current_button.get_index()
+			if ix > 0:
+				reset_buttons_theme()
+				select_button(current_button, 0, Color.TRANSPARENT)
+				current_button=%ButtonContainer.get_child(ix-1)
+				select_button(current_button, 1, color_selected)
+		if ev.keycode == KEY_RIGHT:
+			var ix=current_button.get_index()
+			if ix < button_count-1:
+				reset_buttons_theme()
+				select_button(current_button, 0, Color.TRANSPARENT)
+				current_button=%ButtonContainer.get_child(ix+1)
+				select_button(current_button, 1, color_selected)
+			pass
+"
+
+[sub_resource type="Theme" id="Theme_xoyou"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsrb7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0.180392, 0.286275, 0.447059)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_033w7"]
+bg_color = Color(0, 0, 0, 0.654902)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[node name="Messages" type="Window"]
+position = Vector2i(0, 36)
+size = Vector2i(700, 500)
+exclusive = true
+always_on_top = true
+theme = SubResource("Theme_mgcvv")
+script = SubResource("GDScript_d4yxd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_xoyou")
+alignment = 1
+
+[node name="MessagesContent" type="RichTextLabel" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_wsrb7")
+bbcode_enabled = true
+context_menu_enabled = true
+selection_enabled = true
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 40
+
+[node name="OKButton" type="Button" parent="VBoxContainer/ButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_033w7")
+text = "Close"
+
+[connection signal="close_requested" from="." to="." method="_on_action_selected" binds= [&"CLOSE"]]
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/OKButton" to="." method="_on_action_selected" binds= [&"OKBUTTON"]]
