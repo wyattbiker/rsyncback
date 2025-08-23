@@ -31,7 +31,8 @@ git clone https://github.com/wyattbiker/rsyncback.git
 
 5. Click on Backup Destination Path and pick a folder to use for backup. At this point you will see your screen changed similar to **Fig 2**. and the Run Rsync button enabled.
 
-![](README_IMGS/image3.png)
+<img src="README_IMGS/image3.png" width="90%"/>
+<!-- ![](README_IMGS/image3.png) -->
 <p align="center"><b>Fig 2</b></p>
 
 6. Click on the Exclude File and edit any patterns of files you want to exclude from backup. One line per pattern
@@ -45,7 +46,8 @@ git clone https://github.com/wyattbiker/rsyncback.git
 
 7. To start the backup, click on the Run Rsync button and a popup report will show your project files backed up. The first backup is the longest as the complete project folder is backed up. See example **Fig 3**.
 
-![](README_IMGS/image5.png)
+<img src="README_IMGS/image5.png" width="90%"/>
+<!-- ![](README_IMGS/image5.png) -->
 <p align="center"><b>Fig 3</b></p>
 
 8. Click on View Backup Destination Path to review your backup and the log file. You should see the backup folders similar to **Fig 4**
