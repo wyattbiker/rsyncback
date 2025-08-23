@@ -52,7 +52,8 @@ git clone https://github.com/wyattbiker/rsyncback.git
 
 8. Click on View Backup Destination Path to review your backup and the log file. You should see the backup folders similar to **Fig 4**
 
-![](README_IMGS/image1.png)
+<img src="README_IMGS/image1.png" width="90%"/>
+<!-- ![](README_IMGS/image1.png) -->
 <p align="center"><b>Fig 4</b></p>
 
 9. Go back to editing your project (e.g. clicking on Script). When ready to backup again click on ![](README_IMGS/image2.png)RsyncBack link to open the plugin screen and then click the Run Rsync button.  A new report will show only the changed files that were backed up. Clicking on the View Backup Destination Path to review the backups in that folder.
@@ -120,7 +121,8 @@ As we said before, RsyncBack creates an rsync command that incrementally backs 
 
 The backup folders are exact ordinary folders of your project. To restore, you can copy or view using your system's File Manager.
 
-![](README_IMGS/image1.png)
+<img src="README_IMGS/image1.png" width="90%"/>
+<!-- ![](README_IMGS/image1.png) -->
 
 <p align="center"><b>Fig A4</b></p>
 
