@@ -22,7 +22,7 @@ git clone https://github.com/wyattbiker/rsyncback.git
 
 3. To make a backup, click on the ![](README_IMGS/image2.png)RsyncBack link at the top of the editor to see the main screen. Here you select the rsync executable path, the backup path as well as some other options. The first time, you see a screen similar to **Fig 1**
 
-<img src="README_IMGS/image4.png" width="80%"/>
+<img src="README_IMGS/image4.png" width="90%"/>
 <!-- ![](README_IMGS/image4.png) -->
 <p align="center"><b>Fig 1</b></p>
 
