@@ -1,0 +1,306 @@
+<h1 align="center">
+<img src="README_IMGS/image2.png">RsyncBack Godot Plugin
+Documentation</img>
+</h1>
+<h1 align="center">
+For Linux, MacOSX and Windows(*)
+</h1>
+<h2 id="introduction"><ins>Introduction</ins></h2>
+<p>RsyncBack is an addon plugin that uses <strong>rsync</strong> to
+create fast <a
+href="#what-are-incremental-backups-using-hard-links">incremental
+date-stamped backups</a> of your Godot project with a simple click of a
+button . For more detailed description of <strong>rsync</strong> see <a
+href="#what-is-rsync">What is rsync?</a></p>
+<h2 id="quick-setuprun-rsyncback"><ins>Quick Setup/Run
+RsyncBack</ins></h2>
+<p>The following is a quick install and backup ( See <a
+href="#uninstall-rsynback">Uninstall</a> if you wish to remove RsyncBack
+)</p>
+<ol type="1">
+<li>Clone directly from Github to the <em>./addons</em> folder below
+your project:</li>
+</ol>
+<pre><code>cd &lt;your Godot project&gt;
+mkdir addons   # make addons dir if you dont have one
+cd addons
+git clone https://github.com/wyattbiker/rsyncback.git</code></pre>
+<ol start="2" type="1">
+<li><p>Open your Godot project and enable the RsyncBack plugin in
+Godot’s Menu &gt; <em>Project &gt; Project Settings &gt;
+Plugins</em></p></li>
+<li><p>To make a backup, click on the <img
+src="README_IMGS/image2.png" />RsyncBack link at the top of the editor
+to see the main screen. Here you select the rsync executable path, the
+backup path as well as some other options. The first time, you see a
+screen similar to <strong>Fig 1</strong></p></li>
+</ol>
+<img src="README_IMGS/image4.png" width="90%"/>
+<!-- ![](README_IMGS/image4.png) -->
+<p align="center">
+<b>Fig 1</b>
+</p>
+<ol start="4" type="1">
+<li><p>If rsync is installed and in the $PATH environment (usually
+<em>/usr/local/bin/ or /usr/bin/</em> ), the Rsync Cmd Path label will
+show the path and version. If not you can manually choose it by clicking
+on Rsync Cmd Path label see the section below <a
+href="#check-if-rsync-is-installed">Check if rsync is
+installed</a></p></li>
+<li><p>Click on Backup Destination Path and pick a folder to use for
+backup. At this point you will see your screen changed similar to
+<strong>Fig 2</strong>. and the Run Rsync button enabled.</p></li>
+</ol>
+<img src="README_IMGS/image3.png" width="90%"/>
+<!-- ![](README_IMGS/image3.png) -->
+<p align="center">
+<b>Fig 2</b>
+</p>
+<ol start="6" type="1">
+<li>Click on the Exclude File and edit any patterns of files you want to
+exclude from backup. One line per pattern</li>
+</ol>
+<ul>
+<li>Example to exclude .godot, or any .git folders or any files with an
+extension of .import:</li>
+</ul>
+<pre><code>.godot
+.git*
+*.import</code></pre>
+<ol start="7" type="1">
+<li>To start the backup, click on the Run Rsync button and a popup
+report will show your project files backed up. The first backup is the
+longest as the complete project folder is backed up. See example
+<strong>Fig 3</strong>.</li>
+</ol>
+<img src="README_IMGS/image5.png" width="90%"/>
+<!-- ![](README_IMGS/image5.png) -->
+<p align="center">
+<b>Fig 3</b>
+</p>
+<ol start="8" type="1">
+<li>Click on View Backup Destination Path to review your backup and the
+log file. You should see the backup folders similar to <strong>Fig
+4</strong></li>
+</ol>
+<img src="README_IMGS/image1.png" width="90%"/>
+<!-- ![](README_IMGS/image1.png) -->
+<p align="center">
+<b>Fig 4</b>
+</p>
+<ol start="9" type="1">
+<li>Go back to editing your project (e.g. clicking on Script). When
+ready to backup again click on <img
+src="README_IMGS/image2.png" />RsyncBack link to open the plugin screen
+and then click the Run Rsync button.  A new report will show only the
+changed files that were backed up. Clicking on the View Backup
+Destination Path to review the backups in that folder.</li>
+</ol>
+<h2 id="what-are-incremental-backups-using-hard-links"><ins>What are
+incremental backups using hard-links?<ins></h2>
+<p>Incremental backups in the case of RsyncBack (using rsync), is when
+only changed files in your project are backed up to a new date-time
+stamped folder. In addition hard-links (<a
+href="https://en.wikipedia.org/wiki/Hard_link">https://en.wikipedia.org/wiki/Hard_link</a>)
+are created in that same backed folder to the unchanged files. In
+essense, your backup folder looks like a complete backup, but the backup
+is not only fast, but also takes much less storage.</p>
+<h2 id="what-is-rsync"><ins>What is rsync?<ins></h2>
+<p>Rsync is one of the most popular and stable open source backup tools
+included with Linux and MacOSX (Windows see below <a
+href="#windows-users">Windows Users</a>). It is a terminal run tool with
+numerous options and arguments for backing up your computer folders
+incremental/differential, It has been battle tested for years now, is
+very reliable and has great community support. In its basic form it is a
+copy/sync tool, in that it copies files from source folder to a
+destination folder. Rsync backs up files using the native file system of
+your computer. It does not have its own compressed or proprietary
+database. You can easily use your File Manager to restore with drag and
+drop any backup folder or individual files. You can of course view them
+as regular files using your favorite File Manager. For Linux it could be
+Dolphin/Nemo/etc and Mac it could be Finder. Or it could be the command
+line using <b>ls</b>.</p>
+<h2 id="what-is-the-purpose-of-the-rsyncback-plugin."><ins>What is the
+purpose of the RsyncBack plugin.</ins></h2>
+<p>The main usage for RsyncBack plugin is to be a Godot GUI front end
+and to make it simple to quickly setup and incrementally backup your
+project. Once installed and configured, the plugin can be run with just
+the press of a button to make date-stamped incremental backups of your
+project source files. Each date-stamped backup is its own folder, having
+the name <code>[YYYY-MM-DD][HH-MM-SS]</code>. In addition, it saves
+storage, because the destination will not contain files that have not
+been modified but rather a hardlink to the last one modified. When you
+look or use any of the backup folders, it will look like a complete
+backup of your source. More on this later.</p>
+<h2 id="check-if-rsync-is-installed."><ins>Check if rsync is
+installed.</ins></h2>
+<p>Before you begin, check that rsync is installed on your system. You
+can easily check from the command line by running the following terminal
+commands:  <strong>which rsync</strong> to show you the default path or
+<b>whereis rsync</b> to check if there are more than one installed.
+RsyncBack requires version 3.2.4 or above. See example below. To choose
+the desired rsync path, click on the label Rsync Cmd Path</p>
+<p><b>~$ <code>which rsync</code></b></br> /usr/local/bin/rsync</p>
+<p>or</p>
+<p><b>~$ <code>whereis rsync</code></b></br> rsync: /usr/bin/rsync
+/usr/local/bin/rsync /usr/share/rsync /usr/share/man/man1/rsync.1.gz</p>
+<p><b>~$ <code>rsync -V</code></b></br> rsync  version 3.2.7  protocol
+version 31 <br>Copyright (C) 1996-2022 by Andrew Tridgell, Wayne
+Davison, and others. </br>…….</p>
+<h2 id="windows-users"><ins>Windows Users<ins></h2>
+<h3 id="installing-and-running-rsync-on-windows.">Installing and running
+rsync on Windows.</h3>
+<p>The RsyncBack addon is installed as usual with <a
+href="#quick-setup-and-run-rsyncback">instructions above</a>. However
+you need to tell it where the rsync.exe command is located. To do that
+you would need to install MSYS2 which is a list of Linux commands that
+run as native to Windows. An open source consortium called MSYS2 created
+popular Linux commands that run natively on Windows. There is no need to
+install Linux to do that!</p>
+<p>From their documentation page at <a
+href="https://www.google.com/url?q=https://www.msys2.org&amp;sa=D&amp;source=editors&amp;ust=1752710978297009&amp;usg=AOvVaw2IBV09jFifKjKXb5G7c51c">https://www.msys2.org</a>/:</p>
+<ul>
+<li>MSYS2 is a collection of tools and libraries providing you with an
+easy-to-use environment for building, installing and running native
+Windows software.</li>
+</ul>
+<p>Additional docs here: <a
+href="https://www.google.com/url?q=https://www.msys2.org/docs/what-is-msys2/&amp;sa=D&amp;source=editors&amp;ust=1752710978297700&amp;usg=AOvVaw165IvSn3UOk0Q4QzYSHp4r">https://www.msys2.org/docs/what-is-msys2/</a></p>
+<p>On your Windows browser, follow this link <a
+href="https://www.google.com/url?q=https://www.msys2.org/%23installation&amp;sa=D&amp;source=editors&amp;ust=1752710978298153&amp;usg=AOvVaw2ylkCiPCa0C4eZjIyvGIDy">https://www.msys2.org/#installation:</a> and
+the instructions to install the msys2 executable.</p>
+<p>This will create a native windows folder followed by the path to
+Linux exe commands. You can then install <i>rsync</i> from the terminal
+that opens up running the <i>pacman</i> installer as follows:</p>
+<p><code>pacman -S rsync</code></p>
+<p>It then runs natively under Windows with this command:</p>
+<p><code>c:/msys64/usr/bin/rsync.exe</code></p>
+<p>So in this case, you would choose the path above, in the RsyncBack
+plugin screen, as the path for rsync.</p>
+<p>Note: There are a few articles online on how to install MSYS2 and
+rsync. In fact here is one explaining how to do it if you are using Git.
+<a
+href="https://www.google.com/url?q=https://tlundberg.com/installing-rsync-on-windows&amp;sa=D&amp;source=editors&amp;ust=1752710978300371&amp;usg=AOvVaw24eApOnMICqLL6VHAzBxVx">https://tlundberg.com/installing-rsync-on-windows</a></p>
+<p>From the article: If you didn’t already know, Git for Windows and its
+Git Bash environment is built using <a
+href="https://www.google.com/url?q=http://msys2.org/&amp;sa=D&amp;source=editors&amp;ust=1752710978300813&amp;usg=AOvVaw335tSAbpp4EALksPZui4UQ">msys2</a>,
+but it doesn’t include all the binaries from that project.</p>
+<h2 id="backup-folders-layout-and-restore"><ins>Backup Folders Layout
+and Restore<ins></h2>
+<p>As we said before, RsyncBack creates an rsync command that
+incrementally backs up your project to your chosen backup folder. The
+backup folder will always be called <b>&lt;project name
+folder&gt;-rsync</b>. Inside this folder the backups are copied with the
+name <b>[YYYY-MM-DD][HH_MM_SS]</b>. Also the backup folder includes
+another folder called logfiles, where each backup’s report is kept. See
+<strong>Fig A4</strong> below.</p>
+<p>The backup folders are exact ordinary folders of your project. To
+restore, you can copy or view using your system’s File Manager.</p>
+<p><img src="README_IMGS/image1.png" width="90%"/>
+<!-- ![](README_IMGS/image1.png) --></p>
+<p align="center">
+<b>Fig A4</b>
+</p>
+<p>Even though it may look to you that in your latest folder the
+complete project was copied, in fact what you are seeing is an image
+copy of the previous backup overwritten by the files that are different.
+This is the power of Linux/Mac file system and it is all done in the
+background using hardlinks. It allows for efficient disk storage and
+speed. Rsync does that by comparing your source folder (ie your project
+folder) with the latest backup then copies the changed files to the
+destination. The unchanged are hardlinked. The option that does this is
+–link-dest=”your/last/backup/folder”  See example command below.</p>
+<p>In fact every file you create is a hardlink to an inode. If you copy
+that file to another folder it does not duplicate it. It simply makes a
+directory entry pointing to what is called an inode. Inodes are beyond
+the scope of this document, but if you are curious about inodes read
+this short writeup I found <a
+href="https://albertoalcolea.com/blog/incremental-backups-with-rsync-+-hard-links/">https://albertoalcolea.com/blog/incremental-backups-with-rsync-+-hard-links</a></p>
+<h2 id="customizing-the-defaults-of-rsynback."><ins>Customizing the
+Defaults of RsynBack.</ins></h2>
+<p>A new install of RsyncBack initially reads the choices from a
+resource file called <b>config.tres</b>. The user then makes the
+selections and runs the backup. This <b>config.tres</b> can be manually
+edited in the Inspector. The simplest way to do that is to click on the
+<em>Config File</em> label link and select Edit In Inspector (Make sure
+Inspector is showing in the dock). The Godot Inspector will load the
+<b>config.tres</b> resource file and allow you to make the changes
+manually and save the config file. Make sure you reload the plugin.</p>
+<p>Hover over each of the <b>config.tres</b> properties and read the
+tooltip for more info. The Rsync Arguments Template is where you would
+customize further the rsync command options.</p>
+<p>It looks similar to this:</p>
+<pre><code>{dry_run_argument} -avih --mkpath --stats  \
+ --out-format=&quot;%M %15&#39;l %5f&quot;  \
+ --exclude-from=&quot;{exclude_file_path}&quot; \
+ --link-dest=&quot;{dest_path}/{project_name}/{prev_backup}&quot; \
+ --log-file-format=&quot;%M %15&#39;l %5f&quot; \
+ --log-file=&quot;{log_file_path}/{current_datetime}{log_file_suffix}&quot; \
+ &quot;{source_path}&quot; \
+ &quot;{dest_path}/{project_name}/{current_datetime}&quot;</code></pre>
+<p>The curlies {} are properties replaced by RsyncBack when you run the
+backup. In effect the above becomes something like this command which is
+what executes.</p>
+<pre><code>/usr/local/bin/rsync  -avih --mkpath --stats  \
+ --out-format=&quot;%M %15&#39;l %5f&quot;  \
+ --exclude-from=&quot;/home/user1/godot/tps-demo/addons/rsyncback/exclude.txt&quot; \
+ --link-dest=&quot;/home/user1/myback/tps-demo-rsync/[2024-10-16][13_22_37]&quot; \
+ --log-file-format=&quot;%M %15&#39;l %5f&quot; \
+ --log-file=&quot;/home/user1/myback/tps-demo-rsync/logfiles/[2024-10-18][17_07_35]_log.txt&quot; \
+ &quot;/home/user1/godot/tps-demo/&quot; \
+ &quot;/home/user1/myback/tps-demo-rsync/[2024-10-18][17_07_35]&quot;</code></pre>
+<p>In fact you will see this command in the Rsync Command window. You
+can click and copy it to the clipboard and run it directly in the
+command line if you wish!</p>
+<p>Notice the rsync command is added from the path you chose. Also
+<em>{dry_run_argument}</em> is not used in this case since we didn’t
+check the box. Dry run does not make a backup but simply executes to see
+if your command is ok. It is always reset back.</p>
+<p>You can modify this template anyway you want. E.g. add a remote
+backup ssh keyfile or add –delete option. Study up on rsync if you plan
+to customize the template.</p>
+<h2 id="uninstall-rsynback"><ins>Uninstall RsynBack</ins></h2>
+<p>Of course you may want to either disable RsyncBack or completely
+uninstall it. To disable the plugin click on Godot’s Menu &gt;
+<em>Project &gt; Project Settings &gt; Plugins</em> and uncheck the
+RsyncBack box.</p>
+<p>To completely remove it, just delete the rsyncback plugin folder
+inside the addons folder of your project. This will remove the plugin.
+However any backups are not affected, although you should check that you
+did not backup anything inside the rsyncback folder you may want to
+keep.</p>
+<p>You may have to restart your project after deleting plugins.</p>
+<h2 id="references"><ins>References:</ins></h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr>
+<td>Official Website</td>
+<td><a
+href="https://www.google.com/url?q=https://rsync.samba.org&amp;sa=D&amp;source=editors&amp;ust=1752710978312072&amp;usg=AOvVaw25CHlN9F1bTtMpuzVnW1u7">https://rsync.samba.org</a></td>
+</tr>
+<tr>
+<td>rsync man page</td>
+<td><a
+href="https://www.google.com/url?q=https://ss64.com/bash/rsync.html&amp;sa=D&amp;source=editors&amp;ust=1752710978312695&amp;usg=AOvVaw2iYK5ejJnbxcPtT15k0n-v">https://ss64.com/bash/rsync.html</a></td>
+</tr>
+<tr>
+<td>Command line tutorial/Examples</td>
+<td><a
+href="https://www.google.com/url?q=https://www.geeksforgeeks.org/rsync-command-in-linux-with-examples/&amp;sa=D&amp;source=editors&amp;ust=1752710978313395&amp;usg=AOvVaw2jHyTD_11nu4whroMVjCb7">https://www.geeksforgeeks.org/rsync-command-in-linux-with-examples/</a></td>
+</tr>
+<tr>
+<td>Incremental backups with rsync + hard links</td>
+<td><a
+href="https://albertoalcolea.com/blog/incremental-backups-with-rsync-+-hard-links/">https://albertoalcolea.com/blog/incremental-backups-with-rsync-+-hard-links/</a></td>
+</tr>
+<tr>
+<td>Installing rsync for Windows.</td>
+<td><a
+href="https://www.google.com/url?q=https://www.msys2.org/&amp;sa=D&amp;source=editors&amp;ust=1752710978314618&amp;usg=AOvVaw0Mjlx0uL2EENfNgSCe6qRc">https://www.msys2.org/</a></td>
+</tr>
+</tbody>
+</table>
