@@ -143,6 +143,19 @@ func calculate_position():
 		tooltip.global_position.x = host_ctrl.owner.global_position.x +  host_ctrl.owner.size.x - tooltip_type.size.x
 		
 	return
+
+#If tooltip contains URL tags, then open it with default application
+# usually the browser
 func _on_rich_text_label_meta_clicked(meta):
+	if get_url_scheme(meta) == "":
+		var absolute_path = ProjectSettings.globalize_path("res://")
+		print(absolute_path.path_join(meta))
+	print(meta)
 	OS.shell_open(str(meta))
 	pass # Replace with function body.
+
+func get_url_scheme(url_string: String) -> String:
+	var colon_index = url_string.find(":")
+	if colon_index != -1:
+		return url_string.substr(0, colon_index)
+	return "" # Return an empty string if no scheme is found

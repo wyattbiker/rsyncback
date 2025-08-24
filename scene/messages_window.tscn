@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c60e5xxjgbog3"]
+[gd_scene load_steps=7 format=3 uid="uid://c60e5xxjgbog3"]
 
 [sub_resource type="Theme" id="Theme_mgcvv"]
 
@@ -107,7 +107,29 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_033w7"]
+[sub_resource type="GDScript" id="GDScript_i62wf"]
+script/source = "@tool
+extends RichTextLabel
+
+#If richtext message contains URL tags, then open it with default application
+# usually the browser
+func _on_rich_text_label_meta_clicked(meta):
+	if get_url_scheme(meta) == \"\":
+		var absolute_path = ProjectSettings.globalize_path(\"res://\")
+		print(absolute_path.path_join(meta))
+	print(meta)
+	OS.shell_open(str(meta))
+	$\"../..\".hide()
+	pass # Replace with function body.
+
+func get_url_scheme(url_string: String) -> String:
+	var colon_index = url_string.find(\":\")
+	if colon_index != -1:
+		return url_string.substr(0, colon_index)
+	return \"\" # Return an empty string if no scheme is found
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3norj"]
 bg_color = Color(0, 0, 0, 0.654902)
 border_width_left = 1
 border_width_top = 1
@@ -144,6 +166,7 @@ context_menu_enabled = true
 selection_enabled = true
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
+script = SubResource("GDScript_i62wf")
 
 [node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
@@ -156,8 +179,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_styles/normal = SubResource("StyleBoxFlat_033w7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3norj")
 text = "Close"
 
 [connection signal="close_requested" from="." to="." method="_on_action_selected" binds= [&"CLOSE"]]
+[connection signal="meta_clicked" from="VBoxContainer/MessagesContent" to="VBoxContainer/MessagesContent" method="_on_rich_text_label_meta_clicked"]
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/OKButton" to="." method="_on_action_selected" binds= [&"OKBUTTON"]]

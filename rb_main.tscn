@@ -411,6 +411,8 @@ offset_right = 846.0
 offset_bottom = 49.0
 tooltip_text = "[center][u][color=lightblue]RsyncBack Quick Start instructions for Linux and MacOSX[/color][/u][/center]
 
+[center][url=addons/rsyncback/readme.html]For Full HTML Docs Click Here[/url][/center]
+
 [color=orange]Note:[/color] Hovering mouse over the underlined links and buttons will show more details.
 
 [u][color=lightblue]Preparing to use RsyncBack[/color][/u]
@@ -425,7 +427,11 @@ If there were no error messages, you can review the rsync command generated. Run
 [/ol]
 
 [center]For more info on rsync click [url]https://rsync.samba.org[/url][/center]
+
+
 "
+theme_override_colors/font_disabled_color = Color(0.407791, 0.594238, 1, 1)
+theme_override_colors/icon_disabled_color = Color(0.172549, 0.956863, 0.956863, 1)
 icon = ExtResource("2_lbmv2")
 expand_icon = true
 script = SubResource("GDScript_7w1kq")
