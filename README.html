@@ -21,10 +21,10 @@ href="#uninstall-rsynback">Uninstall</a> if you wish to remove RsyncBack
 <li>Clone directly from Github to the <em>./addons</em> folder below
 your project:</li>
 </ol>
-<pre><code>cd &lt;your Godot project&gt;
-mkdir addons   # make addons dir if you dont have one
-cd addons
-git clone https://github.com/wyattbiker/rsyncback.git</code></pre>
+<pre><code>    cd &lt;your Godot project&gt;
+    mkdir addons   # make addons dir if you dont have one
+    cd addons
+    git clone https://github.com/wyattbiker/rsyncback.git</code></pre>
 <ol start="2" type="1">
 <li><p>Open your Godot project and enable the RsyncBack plugin in
 Godot’s Menu &gt; <em>Project &gt; Project Settings &gt;
@@ -64,9 +64,12 @@ exclude from backup. One line per pattern</li>
 <li>Example to exclude .godot, or any .git folders or any files with an
 extension of .import:</li>
 </ul>
-<pre><code>.godot
-.git*
-*.import</code></pre>
+<pre><code>    .godot
+    .git*
+    *.import</code></pre>
+<p>For more info in exclude patterns click here: <a
+href="https://download.samba.org/pub/rsync/rsync.1#PATTERN_MATCHING_RULES">rsync
+exclude pattern mathcing rules</a></p>
 <ol start="7" type="1">
 <li>To start the backup, click on the Run Rsync button and a popup
 report will show your project files backed up. The first backup is the
@@ -83,7 +86,9 @@ longest as the complete project folder is backed up. See example
 log file. You should see the backup folders similar to <strong>Fig
 4</strong></li>
 </ol>
-<img src="README_IMGS/image1.png" width="90%"/>
+<p align="center">
+<img src="README_IMGS/image1.png" height="85%" />
+</p>
 <!-- ![](README_IMGS/image1.png) -->
 <p align="center">
 <b>Fig 4</b>
@@ -196,8 +201,10 @@ another folder called logfiles, where each backup’s report is kept. See
 <strong>Fig A4</strong> below.</p>
 <p>The backup folders are exact ordinary folders of your project. To
 restore, you can copy or view using your system’s File Manager.</p>
-<p><img src="README_IMGS/image1.png" width="90%"/>
-<!-- ![](README_IMGS/image1.png) --></p>
+<p align="center">
+<img src="README_IMGS/image1.png" height="85%" />
+</p>
+<!-- ![](README_IMGS/image1.png) -->
 <p align="center">
 <b>Fig A4</b>
 </p>
@@ -279,18 +286,17 @@ keep.</p>
 <tbody>
 <tr>
 <td>Official Website</td>
-<td><a
-href="https://www.google.com/url?q=https://rsync.samba.org&amp;sa=D&amp;source=editors&amp;ust=1752710978312072&amp;usg=AOvVaw25CHlN9F1bTtMpuzVnW1u7">https://rsync.samba.org</a></td>
+<td><a href="https://rsync.samba.org">https://rsync.samba.org</a></td>
 </tr>
 <tr>
 <td>rsync man page</td>
 <td><a
-href="https://www.google.com/url?q=https://ss64.com/bash/rsync.html&amp;sa=D&amp;source=editors&amp;ust=1752710978312695&amp;usg=AOvVaw2iYK5ejJnbxcPtT15k0n-v">https://ss64.com/bash/rsync.html</a></td>
+href="https://download.samba.org/pub/rsync/rsync.1">https://download.samba.org/pub/rsync/rsync.1</a></td>
 </tr>
 <tr>
 <td>Command line tutorial/Examples</td>
 <td><a
-href="https://www.google.com/url?q=https://www.geeksforgeeks.org/rsync-command-in-linux-with-examples/&amp;sa=D&amp;source=editors&amp;ust=1752710978313395&amp;usg=AOvVaw2jHyTD_11nu4whroMVjCb7">https://www.geeksforgeeks.org/rsync-command-in-linux-with-examples/</a></td>
+href="https://www.geeksforgeeks.org/rsync-command-in-linux-with-examples/">https://www.geeksforgeeks.org/rsync-command-in-linux-with-examples/</a></td>
 </tr>
 <tr>
 <td>Incremental backups with rsync + hard links</td>
@@ -299,8 +305,7 @@ href="https://albertoalcolea.com/blog/incremental-backups-with-rsync-+-hard-link
 </tr>
 <tr>
 <td>Installing rsync for Windows.</td>
-<td><a
-href="https://www.google.com/url?q=https://www.msys2.org/&amp;sa=D&amp;source=editors&amp;ust=1752710978314618&amp;usg=AOvVaw0Mjlx0uL2EENfNgSCe6qRc">https://www.msys2.org/</a></td>
+<td><a href="https://www.msys2.org">https://www.msys2.org/</a></td>
 </tr>
 </tbody>
 </table>

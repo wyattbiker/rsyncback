@@ -12,10 +12,10 @@ The following is a quick install and backup ( See [Uninstall](#uninstall-rsynbac
 
 1. Clone directly from Github to the <em>./addons</em> folder below your project:
 ```
-cd <your Godot project>
-mkdir addons   # make addons dir if you dont have one
-cd addons
-git clone https://github.com/wyattbiker/rsyncback.git
+    cd <your Godot project>
+    mkdir addons   # make addons dir if you dont have one
+    cd addons
+    git clone https://github.com/wyattbiker/rsyncback.git
 ```
 
 2. Open your Godot project and enable the RsyncBack plugin in Godot’s Menu > <em>Project > Project Settings > Plugins</em>
@@ -39,10 +39,12 @@ git clone https://github.com/wyattbiker/rsyncback.git
 
 - Example to exclude .godot, or any .git folders or any files with an extension of .import:
 ```
-.godot
-.git*
-*.import
+    .godot
+    .git*
+    *.import
 ```
+
+For more info in exclude patterns click here: [rsync exclude pattern mathcing rules](https://download.samba.org/pub/rsync/rsync.1#PATTERN_MATCHING_RULES)
 
 7. To start the backup, click on the Run Rsync button and a popup report will show your project files backed up. The first backup is the longest as the complete project folder is backed up. See example **Fig 3**.
 
@@ -52,7 +54,7 @@ git clone https://github.com/wyattbiker/rsyncback.git
 
 8. Click on View Backup Destination Path to review your backup and the log file. You should see the backup folders similar to **Fig 4**
 
-<img src="README_IMGS/image1.png" width="90%"/>
+<p align="center"><img src="README_IMGS/image1.png" height="85%" /></p>
 <!-- ![](README_IMGS/image1.png) -->
 <p align="center"><b>Fig 4</b></p>
 
@@ -121,7 +123,7 @@ As we said before, RsyncBack creates an rsync command that incrementally backs 
 
 The backup folders are exact ordinary folders of your project. To restore, you can copy or view using your system's File Manager.
 
-<img src="README_IMGS/image1.png" width="90%"/>
+<p align="center"><img src="README_IMGS/image1.png" height="85%" /></p>
 <!-- ![](README_IMGS/image1.png) -->
 
 <p align="center"><b>Fig A4</b></p>
@@ -181,10 +183,10 @@ You may have to restart your project after deleting plugins.
 
 |   |   |
 |---|---|
-|Official Website|[https://rsync.samba.org](https://www.google.com/url?q=https://rsync.samba.org&sa=D&source=editors&ust=1752710978312072&usg=AOvVaw25CHlN9F1bTtMpuzVnW1u7)|
-|rsync man page|[https://ss64.com/bash/rsync.html](https://www.google.com/url?q=https://ss64.com/bash/rsync.html&sa=D&source=editors&ust=1752710978312695&usg=AOvVaw2iYK5ejJnbxcPtT15k0n-v)|
-|Command line tutorial/Examples|[https://www.geeksforgeeks.org/rsync-command-in-linux-with-examples/](https://www.google.com/url?q=https://www.geeksforgeeks.org/rsync-command-in-linux-with-examples/&sa=D&source=editors&ust=1752710978313395&usg=AOvVaw2jHyTD_11nu4whroMVjCb7)|
+|Official Website|[https://rsync.samba.org](https://rsync.samba.org)|
+|rsync man page|[https://download.samba.org/pub/rsync/rsync.1](https://download.samba.org/pub/rsync/rsync.1)|
+|Command line tutorial/Examples|[https://www.geeksforgeeks.org/rsync-command-in-linux-with-examples/](https://www.geeksforgeeks.org/rsync-command-in-linux-with-examples/)|
 |Incremental backups with rsync + hard links|[https://albertoalcolea.com/blog/incremental-backups-with-rsync-+-hard-links/](https://albertoalcolea.com/blog/incremental-backups-with-rsync-+-hard-links/)|
-|Installing rsync for Windows.|[https://www.msys2.org/](https://www.google.com/url?q=https://www.msys2.org/&sa=D&source=editors&ust=1752710978314618&usg=AOvVaw0Mjlx0uL2EENfNgSCe6qRc)|
+|Installing rsync for Windows.|[https://www.msys2.org/](https://www.msys2.org)|
 
 
