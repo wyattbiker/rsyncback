@@ -149,8 +149,7 @@ func calculate_position():
 func _on_rich_text_label_meta_clicked(meta):
 	if get_url_scheme(meta) == "":
 		var absolute_path = ProjectSettings.globalize_path("res://")
-		print(absolute_path.path_join(meta))
-	print(meta)
+		meta=absolute_path.path_join(meta)
 	OS.shell_open(str(meta))
 	pass # Replace with function body.
 

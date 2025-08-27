@@ -114,10 +114,11 @@ extends RichTextLabel
 #If richtext message contains URL tags, then open it with default application
 # usually the browser
 func _on_rich_text_label_meta_clicked(meta):
+	prints(\"Open Hyperlink \",meta)
 	if get_url_scheme(meta) == \"\":
 		var absolute_path = ProjectSettings.globalize_path(\"res://\")
-		print(absolute_path.path_join(meta))
-	print(meta)
+		meta=absolute_path.path_join(meta)
+		print(\"Meta: \",meta)
 	OS.shell_open(str(meta))
 	$\"../..\".hide()
 	pass # Replace with function body.
@@ -129,7 +130,7 @@ func get_url_scheme(url_string: String) -> String:
 	return \"\" # Return an empty string if no scheme is found
 "
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3norj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i62wf"]
 bg_color = Color(0, 0, 0, 0.654902)
 border_width_left = 1
 border_width_top = 1
@@ -179,7 +180,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_styles/normal = SubResource("StyleBoxFlat_3norj")
+theme_override_styles/normal = SubResource("StyleBoxFlat_i62wf")
 text = "Close"
 
 [connection signal="close_requested" from="." to="." method="_on_action_selected" binds= [&"CLOSE"]]

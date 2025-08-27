@@ -331,7 +331,21 @@ func _on_view_messages_pressed():
 		)
 
 func _on_clipboard_button_pressed():
-	DisplayServer.clipboard_set($RSyncCommand.text)
+	var clip_text:String = $RSyncCommand.text
+	
+	# Replace continuation characters to ^ for Windows
+	if OS.get_name() == "Windows":
+		var eol_pat = r"\\[ ]*$"
+		var regx := RegEx.new()
+		var isok = regx.compile(eol_pat, true)
+		if isok == OK:
+			var split_lines=clip_text.split("\n")
+			clip_text = ""
+			for line in split_lines:
+				clip_text += regx.sub(line, "  ")
+				
+	prints("Clip Text: ", clip_text)
+	DisplayServer.clipboard_set(clip_text)
 	$ClipboardButton/Label.visible = true
 	await get_tree().create_timer(3).timeout
 	$ClipboardButton/Label.visible = false

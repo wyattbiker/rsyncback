@@ -291,8 +291,44 @@ class ConfigArgs extends RsyncManage:
 
 		# Populate arguments to string using the template
 		var dict_args: Dictionary = get_props(rsync_args)
+		
+		# Convert windows drive letter to rsync formatted
+		if OS.get_name() == "Windows":
+			dict_args.source_path=path_to_rsync(dict_args.source_path)
+			dict_args.dest_path=path_to_rsync(dict_args.dest_path)
+			pass
+			
 		var sarguments = rsync_template.format(dict_args)
 		return sarguments
+
+	# Convert continuation characters from / to ^
+	# to match Windows command line 
+	func replace_continuation(spath: String) -> String:
+		print(spath)
+		
+		return spath
+
+
+
+	# Convert Windows Drive letter path to URI
+	# Replace X: with /X and return the path
+	func path_to_rsync(spath: String) -> String:
+		var windows_path_pattern:String = r'^(([[:alpha:]]):).*$'
+		var regex = RegEx.new()
+		regex.compile(windows_path_pattern)
+		
+		# TEST
+		#spath=r"/abc/xyz"
+		
+		var spath_match:RegExMatch=regex.search(spath, 0, -1)
+		if spath_match != null:
+			spath =  r"/" + spath_match.strings[2] + spath.substr(2)
+			#print(spath,"   ",spath_match.strings)
+		else:
+			#print(spath)
+			pass
+			
+		return spath
 
 	# Push configuration error message to end of list.
 	# Must be Result class formatted
@@ -333,19 +369,29 @@ static func exec_rsync(cmgr: ConfigArgs) -> Result:
 
 	# Clean up whitespaces using regex pattern to make it single line
 	var ws_patt := r"\s+|\\"
+	# For Windows remove the continuation
+	if OS.get_name() == "Windows":
+		ws_patt = r"\s+|\\"
+		
 	var regex = RegEx.new()
 	regex.compile(ws_patt)
 	# Replace whitespaces with single space
+	#prints("\nBefore: ",sarguments)
 	sarguments = regex.sub(sarguments, ' ', true)
 
 	var arguments = []
 	arguments = parse_rsync_arguments(sarguments)
-	#prints("\n",sarguments)
+	
+	###### DEBUG CODE
+	#prints("\nAfter: ",sarguments)
 	#print(arguments)
 	#print("\n\n")
 	#for arg in arguments:
 		#print(arg)
-
+	#
+	#prints("Execute Args: ",arguments)
+	######
+	
 	var res := Result.new()
 	res = save_output_log(cmgr.rsync_args.log_file_path, cmgr.rsync_args.current_datetime + "_log.txt", log_heading)
 	if res.code != OK:
@@ -355,7 +401,16 @@ static func exec_rsync(cmgr: ConfigArgs) -> Result:
 
 	var value = []
 	var code: int = 0
-	code = OS.execute(cmgr.rsync_cmd_path, arguments, value, true, false )
+	
+	
+	# For Windows remove the continuation
+	if OS.get_name() == "Windows":
+		prints("Windows rsync command:\n", cmgr.rsync_cmd_path + " " + sarguments)
+		code=OS.execute("CMD.exe", ["/C", cmgr.rsync_cmd_path + " " + sarguments], value)
+	else:
+		prints("Linux/MacOSXrsync command:\n",cmgr.rsync_cmd_path + " " + sarguments)
+		prints("\nArguments to rsync: ",arguments)
+		code = OS.execute(cmgr.rsync_cmd_path, arguments, value, true, false )
 
 	#var execpipe:=ExecPipeClass.new()
 	#execpipe.exec_using_pipe(cmgr.rsync_cmd_path, arguments)
@@ -379,28 +434,36 @@ static func parse_rsync_arguments(sarguments: String) -> Array:
 	#
 	var send = 0
 	var arguments = []
-	var arg = regex1.search(sarguments, send, - 1)
+	var arg = regex1.search(sarguments, send, - 1)	
+	#prints(arg.strings)
 	var arg2
 	var sstart2=0
 	var send2= -1
 	var val
 	var val2
+	var arr_val=[""]
 	while arg != null:
 		send = arg.get_end()
 		val = arg.strings[0]
-
+		#prints("arg: ",val)
 		# escape blanks inside quoted strings of each parameter
 		# e.g. file names/paths
 		arg2=regex2.search(val, 0, - 1)
 		if arg2 != null:
+			#prints("Arg2: ",arg2.strings)
 			send2=arg2.get_end()
 			sstart2=arg2.get_start()
 			val2 = arg2.strings[0]
+			
 			# if quoted string has blank, than add a \
 			val = fix_blanks(sstart2, send2, val, val2)
+			arr_val[0]=val
+			#prints("Val2: ",val2, "  Val: ",val, " Arr Val: ",arr_val)
 			pass
 		arguments.append(val)
 		arg = regex1.search(sarguments, send, - 1)
+		
+	#prints("Parsed Arguments: ",arguments)
 	return arguments
 
 
