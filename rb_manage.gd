@@ -132,6 +132,9 @@ class ConfigArgs extends RsyncManage:
 			res.description = "Destination %s backup folder does not exist or is not available. Please choose one that exists.\nNote: Choose Backup Path outside your Godot Project Source Path." %\
 					[rsync_args.dest_path]
 			push_error_message(res)
+			rsync_args.dest_path = ""
+			rsync_args.prev_backup = ""
+			rsync_args.log_file_path = ""
 			return self
 
 		var cd = dir.get_current_dir().path_join("")
@@ -185,6 +188,7 @@ class ConfigArgs extends RsyncManage:
 			version.res.code = -1
 			version.res.description = "which %s: Rsync Command Path does not exist. Select rsync you wish to run." % rsync_cmd_path
 			push_error_message(version.res)
+			rsync_cmd_path=""
 			# Cannot continue
 			return version
 		else:

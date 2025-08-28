@@ -201,8 +201,17 @@ func display_log(content: String) -> Window:
 
 # Display arguments of the loaded config file.
 func refresh_ui():
+		
 	$RSyncBackupVesion.text = "Ver: " + rsync_back_version
+	
 	$VBoxContainer/RsyncCmdPath.text = cmgr.rsync_cmd_path + " ( Version:" + cmgr.rsync_version.version + " )"
+	if cmgr.rsync_cmd_path == "":
+		$VBoxContainer/RsyncCmdPath.text = "Please choose rsync path!"
+		$VBoxContainer/RsyncCmdPath.add_theme_color_override("font_color",Color.RED)
+		$VBoxContainer/RsyncCmdPath.add_theme_color_override("font_uneditable_color",Color.RED)
+	else: 
+		$VBoxContainer/RsyncCmdPath.remove_theme_color_override("font_uneditable_color")
+		
 	$VBoxContainer/RsyncCmdPath/RsyncCmdPathClick.tooltip_text = "Click to choose the [u]rsync[/u] executable or binary. Minimum Version: " \
 		+cmgr.rsync_min_version + "\nFor more information about rsync visit " + \
 		"[url=https://download.samba.org/pub/rsync/rsync.1]https://download.samba.org/pub/rsync/rsync.1[/url]"
